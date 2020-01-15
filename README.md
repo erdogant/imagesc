@@ -47,13 +47,19 @@ import imagesc as imagesc
 ### Example:
 ```python
 df = pd.DataFrame(np.random.randint(0,100,size=(10,20)))
-fig = imagesc.seaborn(df.values, df.index.values, df.columns.values)
+A = imagesc.seaborn(df.values, df.index.values, df.columns.values)
+B = imagesc.seaborn(df.values, df.index.values, df.columns.values, annot=True, annot_kws={"size": 12})
+C = imagesc.seaborn(df.values, df.index.values, df.columns.values, annot=True, annot_kws={"size": 12}, cmap='rainbow')
+D = imagesc.seaborn(df.values, df.index.values, df.columns.values, annot=True, annot_kws={"size": 12}, cmap='rainbow', linecolor='#ffffff')
+E = imagesc.seaborn(df.values, df.index.values, df.columns.values, annot=True, annot_kws={"size": 12}, cmap='rainbow', linecolor='#ffffff', linewidth=0)
+
 ```
 <p align="center">
-  <img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/seaborn1.png" width="300" />
-  <img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/seaborn2.png" width="300" />
-  <img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/seaborn3.png" width="300" />
-  <img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/seaborn4.png" width="300" />
+  A<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/seaborn1.png" width="300" />
+  B<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/seaborn2.png" width="300" />
+  C<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/seaborn3.png" width="300" />
+  D<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/seaborn4.png" width="300" />
+  D<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/seaborn5.png" width="300" />
 </p>
 
 
