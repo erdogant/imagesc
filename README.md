@@ -44,7 +44,7 @@ python setup.py install
 import imagesc as imagesc
 ```
 
-### Example seaborn:
+#### Example seaborn:
 The heatmap based on seaborn is highly tweakable but can be slow when using large datasets.
 ```python
 df = pd.DataFrame(np.random.randint(0,100,size=(10,20)))
@@ -61,7 +61,7 @@ D = imagesc.seaborn(df.values, df.index.values, df.columns.values, annot=True, a
 </p>
 
 
-### Example cluster:
+#### Example cluster:
 The heatmap based on seaborn-cluster and clusters the data before plotting. This plot tweakable but can be even slower then seaborn.
 ```python
 df = pd.DataFrame(np.random.randint(0,100,size=(10,20)))
@@ -76,6 +76,69 @@ imagesc.savefig(fig_C1, './docs/figs/cluster4.png')
   C2<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/cluster2.png" width="300" />
   C3<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/cluster3.png" width="300" />
   C4<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/cluster4.png" width="300" />
+</p>
+
+#### Example fast:
+The heatmap based on fast is fast but not so much tweakable.
+```python
+df = pd.DataFrame(np.random.randint(0,100,size=(10,20)))
+fig_F1 = imagesc.fast(df.values, df.index.values, df.columns.values)
+fig_F2 = imagesc.fast(df.values, df.index.values, df.columns.values, grid=False)
+fig_F3 = imagesc.fast(df.values, df.index.values, df.columns.values, grid=False, cbar=False)
+fig_F4 = imagesc.fast(df.values, df.index.values, df.columns.values, grid=True, cbar=False)
+fig_F5 = imagesc.fast(df.values, df.index.values, df.columns.values, cmap='rainbow')
+fig_F6 = imagesc.fast(df.values, df.index.values, df.columns.values, cmap='rainbow', linewidth=0.5, grid=True)
+imagesc.savefig(fig_C1, './docs/figs/fast1.png')
+```
+<p align="center">
+  F1<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/fast1.png" width="300" />
+  F2<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/fast2.png" width="300" />
+  F3<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/fast3.png" width="300" />
+  F4<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/fast4.png" width="300" />
+  F5<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/fast5.png" width="300" />
+  F6<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/fast6.png" width="300" />
+</p>
+
+#### Example fastclean:
+The heatmap based on fastclean is fast and not tweakable. Works best for showing photos.
+```python
+df = pd.DataFrame(np.random.randint(0,100,size=(10,20)))
+fig_FC1 = imagesc.fastclean(df.values)
+fig_FC2 = imagesc.fastclean(df.values, cmap='rainbow')
+imagesc.savefig(fig_C1, './docs/figs/fastclean1.png')
+```
+<p align="center">
+  F1<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/fastclean1.png" width="300" />
+  F2<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/fastclean2.png" width="300" />
+</p>
+
+#### Example plot:
+The heatmap based on plot will behave more-or-less as the one of matlab.
+```python
+df = pd.DataFrame(np.random.randint(0,100,size=(10,20)))
+fig_M1 = imagesc.plot(df.values)
+fig_M2 = imagesc.plot(df.values, cbar=False)
+fig_M3 = imagesc.plot(df.values, cbar=False, axis=False)
+fig_M4 = imagesc.plot(df.values, cbar=False, axis=True, linewidth=0.2)
+fig_M5 = imagesc.plot(df.values, df.index.values, df.columns.values)
+fig_M6 = imagesc.plot(df.values, df.index.values, df.columns.values, cbar=False, linewidth=0.2)
+fig_M7 = imagesc.plot(df.values, df.index.values, df.columns.values, grid=True, cbar=False, linewidth=0.2)
+fig_M8 = imagesc.plot(df.values, df.index.values, df.columns.values, grid=False, cbar=False, linewidth=0.2)
+fig_M9 = imagesc.plot(df.values, df.index.values, df.columns.values, grid=True, cbar=False, linewidth=0.8, linecolor='#ffffff')
+fig_M10 = imagesc.plot(df.values, df.index.values, df.columns.values, grid=True, cbar=False, linewidth=0.8, linecolor='#ffffff', cmap='rainbow')
+imagesc.savefig(fig, './docs/figs/plot10.png')imagesc.savefig(fig_C1, './docs/figs/fast1.png')
+```
+<p align="center">
+  M1<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/plot1.png" width="300" />
+  M2<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/plot2.png" width="300" />
+  M3<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/plot3.png" width="300" />
+  M4<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/plot4.png" width="300" />
+  M5<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/plot5.png" width="300" />
+  M6<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/plot6.png" width="300" />
+  M7<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/plot7.png" width="300" />
+  M8<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/plot8.png" width="300" />
+  M9<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/plot9.png" width="300" />
+  M10<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/plot10.png" width="300" />
 </p>
 
 
