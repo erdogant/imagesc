@@ -142,6 +142,24 @@ imagesc.savefig(fig, './docs/figs/plot10.png')imagesc.savefig(fig_C1, './docs/fi
 </p>
 
 
+#### Timing:
+The heatmap based on plot will behave more-or-less as the one of matlab.
+```python
+import matplotlib.image as mpimg
+img=mpimg.imread('./docs/figs/lenna.png')
+
+fig = imagesc.fast(img)
+# runtime: 2.931 seconds
+
+fig = imagesc.plot(img, linewidth=0, cbar=False)
+# runtime 8.029
+
+fig = imagesc.fastclean(img)
+# runtime: 11.042
+
+```
+
+
 ## Citation
 Please cite imagesc in your publications if this is useful for your research. Here is an example BibTeX entry:
 ```BibTeX
