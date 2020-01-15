@@ -3,8 +3,9 @@
 [![Python](https://img.shields.io/pypi/pyversions/imagesc)](https://img.shields.io/pypi/pyversions/imagesc)
 [![PyPI Version](https://img.shields.io/pypi/v/imagesc)](https://pypi.org/project/imagesc/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/erdogant/imagesc/blob/master/LICENSE)
+[![Downloads](https://pepy.tech/badge/imagesc/week)](https://pepy.tech/project/imagesc/week)
 
-* imagesc is an Python package to create heatmaps.
+* imagesc is an Python package to create heatmaps. Multiple different manners are implemented, each with specific properties that can help to easily create your heatmap. the **fast** and **fastclean** method is optimized for speed, the **cluster** method allows direct clustering, the **seaborn** method contains many configuration settings, and finally, the **plot** resamples the imagesc from matlab.
 
 ## Contents
 - [Installation](#-installation)
@@ -20,11 +21,10 @@
 * It is distributed under the MIT license.
 
 ## Requirements
-* It is advisable to create a new environment. 
 ```python
-conda create -n env_imagesc python=3.6
-conda activate env_imagesc
-pip install numpy pandas tqdm matplotlib
+pip install seaborn numpy pandas matplotlib
+or
+pip install -r requirements.txt
 ```
 
 ## Quick Start
@@ -68,8 +68,18 @@ Please cite imagesc in your publications if this is useful for your research. He
 ```
 
 ## References
-* 
-   
+* seaborn
+https://seaborn.pydata.org/generated/seaborn.heatmap.html
+* clustermap
+https://seaborn.pydata.org/generated/seaborn.clustermap.html
+* fast and clean
+https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.axes.Axes.pcolor.html
+* Other
+https://matplotlib.org/3.1.1/gallery/images_contours_and_fields/image_annotated_heatmap.html
+* Colormap
+https://matplotlib.org/examples/color/colormaps_reference.html
+
+
 ## Maintainers
 * Erdogan Taskesen, github: [erdogant](https://github.com/erdogant)
 
