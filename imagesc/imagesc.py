@@ -11,6 +11,7 @@
 
 
  INPUT:
+ ------
 
    data:           Numpy array with rows and columns
 
@@ -21,6 +22,7 @@
 
 
  OPTIONAL
+ --------
 
    normalize:      Boolean [False,True]: Normalize data per row. x-x_mean  / max()-min()
                    True: Yes
@@ -44,6 +46,7 @@
 
 
  SPECIFIC ARGUMENTS
+ ------------------
 
    standard_scale: Boolean [False,True]
                    True: Yes
@@ -99,10 +102,12 @@
                    'Set1'       Discrete colors
 
  OUTPUT
+ ------
 	dictionary
 
 
  DESCRIPTION
+ -----------
     * seaborn
     https://seaborn.pydata.org/generated/seaborn.heatmap.html
     
@@ -120,6 +125,8 @@
 
 
  EXAMPLE
+ -------
+ 
    import pandas as pd
    import numpy as np
    import imagesc as imagesc
@@ -140,7 +147,6 @@ import matplotlib
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
-import seaborn as sns
 
 #%% General plot
 def plot(data, row_labels=None, col_labels=None, **args):
@@ -206,6 +212,8 @@ def seaborn(data, row_labels=None, col_labels=None, **args):
 
     """
     assert not isinstance(data, pd.DataFrame), print('[IMAGESC] data input must be numpy array')
+    # Load libraries
+    import seaborn as sns
     # Set defaults
     args, args_im = _defaults(args)
     # Linewidth if required
@@ -267,6 +275,7 @@ def cluster(data, row_labels=None, col_labels=None, **args):
     
     """
     assert not isinstance(data, pd.DataFrame), print('[IMAGESC] data input must be numpy array')
+    import seaborn as sns
     # Set defaults
     args, args_im = _defaults(args)
     # Linewidth if required
