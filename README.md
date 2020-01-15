@@ -46,13 +46,14 @@ import imagesc as imagesc
 
 ### Example:
 ```python
-df = pd.read_csv('https://github.com/erdogant/hnet/blob/master/imagesc/data/example_data.csv')
-model = imagesc.fit(df)
-G = imagesc.plot(model)
+df = pd.DataFrame(np.random.randint(0,100,size=(10,20)))
+fig = imagesc.seaborn(df.values, df.index.values, df.columns.values)
 ```
 <p align="center">
-  <img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/fig1.png" width="600" />
-  
+  <img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/seaborn1.png" width="300" />
+  <img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/seaborn2.png" width="300" />
+  <img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/seaborn3.png" width="300" />
+  <img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/seaborn4.png" width="300" />
 </p>
 
 
