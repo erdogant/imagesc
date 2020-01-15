@@ -55,11 +55,11 @@ E = imagesc.seaborn(df.values, df.index.values, df.columns.values, annot=True, a
 
 ```
 <p align="center">
-  A<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/seaborn1.png" width="300" />
-  B<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/seaborn2.png" width="300" />
-  C<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/seaborn3.png" width="300" />
-  D<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/seaborn4.png" width="300" />
-  D<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/seaborn5.png" width="300" />
+  <center>A</center><img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/seaborn1.png" width="200" />
+  B<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/seaborn2.png" width="200" />
+  C<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/seaborn3.png" width="200" />
+  D<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/seaborn4.png" width="200" />
+  D<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/seaborn5.png" width="200" />
 </p>
 
 
