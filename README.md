@@ -44,7 +44,8 @@ python setup.py install
 import imagesc as imagesc
 ```
 
-### Example:
+### Example seaborn:
+The heatmap based on seaborn is highly tweakable but can be slow when using large datasets.
 ```python
 df = pd.DataFrame(np.random.randint(0,100,size=(10,20)))
 A = imagesc.seaborn(df.values, df.index.values, df.columns.values)
@@ -57,6 +58,24 @@ D = imagesc.seaborn(df.values, df.index.values, df.columns.values, annot=True, a
   B<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/seaborn2.png" width="300" />
   C<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/seaborn3.png" width="300" />
   D<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/seaborn4.png" width="300" />
+</p>
+
+
+### Example cluster:
+The heatmap based on seaborn-cluster and clusters the data before plotting. This plot tweakable but can be even slower then seaborn.
+```python
+df = pd.DataFrame(np.random.randint(0,100,size=(10,20)))
+fig_C1 = imagesc.cluster(df.values, df.index.values, df.columns.values)
+fig_C2 = imagesc.cluster(df.values, df.index.values, df.columns.values, cmap='rainbow')
+fig_C3 = imagesc.cluster(df.values, df.index.values, df.columns.values, cmap='rainbow', linecolor='#ffffff')
+fig_C4 = imagesc.cluster(df.values, df.index.values, df.columns.values, cmap='rainbow', linecolor='#ffffff', linewidth=0)
+imagesc.savefig(fig_C1, './docs/figs/cluster4.png')
+```
+<p align="center">
+  C1<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/cluster1.png" width="300" />
+  C2<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/cluster2.png" width="300" />
+  C3<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/cluster3.png" width="300" />
+  C4<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/cluster4.png" width="300" />
 </p>
 
 
