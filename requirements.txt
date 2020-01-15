@@ -1,0 +1,8 @@
+#conda create -n env_imagesc python=3.6
+#conda activate env_imagesc
+#conda install spyder
+
+matplotlib
+pandas
+numpy
+seaborn
