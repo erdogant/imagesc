@@ -5,7 +5,7 @@
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/erdogant/imagesc/blob/master/LICENSE)
 [![Downloads](https://pepy.tech/badge/imagesc/week)](https://pepy.tech/project/imagesc/week)
 
-* imagesc is an Python package to create heatmaps. Multiple different manners are implemented, each with specific properties that can help to easily create your heatmap. the **fast** and **fastclean** method is optimized for speed, the **cluster** method allows direct clustering, the **seaborn** method contains many configuration settings, and finally, the **plot** resamples the imagesc from matlab.
+* imagesc is an Python package to create heatmaps. Various methods to create a heatmap are implemented, each with specific properties that can help to easily create your heatmap. The **fast** and **fastclean** method is optimized for speed, the **cluster** method provides clustering, the **seaborn** method contains many configuration settings, and finally, the **plot** as good as possible the imagesc from matlab.
 
 ## Contents
 - [Installation](#-installation)
@@ -45,7 +45,12 @@ import imagesc as imagesc
 ```
 
 #### Example seaborn:
-The heatmap based on seaborn is highly tweakable but can be slow when using large datasets.
+* The heatmap implemented using **seaborn** contains a large number of configurations possibilities. 
+* Slow when using large datasets.
+* Heatmap shape is square
+* Grid is aligned to the cells
+* See here for all parameters: https://seaborn.pydata.org/generated/seaborn.heatmap.html
+
 ```python
 df = pd.DataFrame(np.random.randint(0,100,size=(10,20)))
 A = imagesc.seaborn(df.values, df.index.values, df.columns.values)
@@ -62,7 +67,14 @@ D = imagesc.seaborn(df.values, df.index.values, df.columns.values, annot=True, a
 
 
 #### Example cluster:
-The heatmap based on seaborn-cluster and clusters the data before plotting. This plot tweakable but can be even slower then seaborn.
+* The heatmap created using the **cluster** implementation is usefull when you desire to cluster your data. 
+* Default distance setting: metric="euclidean", linkage="ward"
+* Slow for large data sets
+* Heatmap shape is square
+* Grid is aligned to the cells
+* Possibilities to tweak
+* Possible arguments: https://seaborn.pydata.org/generated/seaborn.clustermap.html
+
 ```python
 df = pd.DataFrame(np.random.randint(0,100,size=(10,20)))
 fig_C1 = imagesc.cluster(df.values, df.index.values, df.columns.values)
@@ -78,8 +90,15 @@ imagesc.savefig(fig_C1, './docs/figs/cluster4.png')
   C4<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/cluster4.png" width="300" />
 </p>
 
+
 #### Example fast:
-The heatmap based on fast is fast but not so much tweakable.
+The heatmap created using the **fast** implementation
+* Fast
+* Not so much tweakable
+* Heatmap shape is square
+* Grid is **not** aligned to the cells
+* Possible arguments: https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.axes.Axes.pcolorfast.html
+
 ```python
 df = pd.DataFrame(np.random.randint(0,100,size=(10,20)))
 fig_F1 = imagesc.fast(df.values, df.index.values, df.columns.values)
@@ -100,7 +119,13 @@ imagesc.savefig(fig_C1, './docs/figs/fast1.png')
 </p>
 
 #### Example fastclean:
-The heatmap based on fastclean is fast and not tweakable. Works best for showing photos.
+The heatmap created using the **fastclean** implementation. This is the **fast** implementation with a minimum number of configurations.
+* Fast
+* Not tweakable
+* Heatmap shape is square
+* Grid is **not** aligned to the cells
+* Possible arguments: https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.axes.Axes.pcolorfast.html
+
 ```python
 df = pd.DataFrame(np.random.randint(0,100,size=(10,20)))
 fig_FC1 = imagesc.fastclean(df.values)
@@ -113,7 +138,13 @@ imagesc.savefig(fig_C1, './docs/figs/fastclean1.png')
 </p>
 
 #### Example plot:
-The heatmap based on plot will behave more-or-less as the one of matlab.
+The heatmap created using the **plot** implementation will behave more-or-less as the one of matlab.
+* Medium speed
+* Tweakable but less then **seaborn**
+* Heatmap shape changes based on the data
+* Grid is aligned to the cells
+* Possible arguments: https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.pyplot.imshow.html
+
 ```python
 df = pd.DataFrame(np.random.randint(0,100,size=(10,20)))
 fig_M1 = imagesc.plot(df.values)
@@ -132,12 +163,15 @@ imagesc.savefig(fig, './docs/figs/plot10.png')imagesc.savefig(fig_C1, './docs/fi
   M1<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/plot1.png" width="300" />
   M2<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/plot2.png" width="300" />
   M3<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/plot3.png" width="300" />
+  <br>
   M4<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/plot4.png" width="300" />
   M5<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/plot5.png" width="300" />
   M6<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/plot6.png" width="300" />
+  <br>
   M7<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/plot7.png" width="300" />
   M8<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/plot8.png" width="300" />
   M9<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/plot9.png" width="300" />
+  <br>
   M10<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/plot10.png" width="300" />
 </p>
 
@@ -151,13 +185,20 @@ img=mpimg.imread('./docs/figs/lenna.png')
 fig = imagesc.fast(img)
 # runtime: 2.931 seconds
 
-fig = imagesc.plot(img, linewidth=0, cbar=False)
+fig = imagesc.fastclean(img)
 # runtime 8.029
 
-fig = imagesc.fastclean(img)
+fig = imagesc.plot(img, linewidth=0, cbar=False)
 # runtime: 11.042
 
 ```
+
+<p align="center">
+  **fast**<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/fast_lenna.png" width="250" />
+  **fastclean**<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/fastclean_lenna.png" width="250" />
+  **plot**<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/plot_lenna1.png" width="250" />
+</p>
+
 
 
 ## Citation
@@ -176,7 +217,7 @@ Please cite imagesc in your publications if this is useful for your research. He
 https://seaborn.pydata.org/generated/seaborn.heatmap.html
 * clustermap
 https://seaborn.pydata.org/generated/seaborn.clustermap.html
-* fast and clean
+* fast and fastclean
 https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.axes.Axes.pcolor.html
 * Other
 https://matplotlib.org/3.1.1/gallery/images_contours_and_fields/image_annotated_heatmap.html
