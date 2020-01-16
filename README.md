@@ -44,7 +44,7 @@ python setup.py install
 import imagesc as imagesc
 ```
 
-#### Example seaborn:
+#### seaborn:
 * The heatmap implemented using **seaborn** contains a large number of configurations possibilities. 
 * Slow when using large datasets.
 * Heatmap shape is square
@@ -59,14 +59,14 @@ C = imagesc.seaborn(df.values, df.index.values, df.columns.values, annot=True, a
 D = imagesc.seaborn(df.values, df.index.values, df.columns.values, annot=True, annot_kws={"size": 12}, cmap='rainbow', linecolor='#ffffff')
 ```
 <p align="center">
-  A<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/seaborn1.png" width="300" />
-  B<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/seaborn2.png" width="300" />
-  C<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/seaborn3.png" width="300" />
-  D<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/seaborn4.png" width="300" />
+  A<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/seaborn1.png" width="250" />
+  B<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/seaborn2.png" width="250" />
+  C<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/seaborn3.png" width="250" />
+  D<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/seaborn4.png" width="250" />
 </p>
 
 
-#### Example cluster:
+#### cluster:
 * The heatmap created using the **cluster** implementation is usefull when you desire to cluster your data. 
 * Default distance setting: metric="euclidean", linkage="ward"
 * Slow for large data sets
@@ -84,14 +84,14 @@ fig_C4 = imagesc.cluster(df.values, df.index.values, df.columns.values, cmap='ra
 imagesc.savefig(fig_C1, './docs/figs/cluster4.png')
 ```
 <p align="center">
-  C1<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/cluster1.png" width="300" />
-  C2<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/cluster2.png" width="300" />
-  C3<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/cluster3.png" width="300" />
-  C4<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/cluster4.png" width="300" />
+  C1<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/cluster1.png" width="250" />
+  C2<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/cluster2.png" width="250" />
+  C3<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/cluster3.png" width="250" />
+  C4<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/cluster4.png" width="250" />
 </p>
 
 
-#### Example fast:
+#### fast:
 The heatmap created using the **fast** implementation
 * Fast
 * Not so much tweakable
@@ -110,15 +110,15 @@ fig_F6 = imagesc.fast(df.values, df.index.values, df.columns.values, cmap='rainb
 imagesc.savefig(fig_C1, './docs/figs/fast1.png')
 ```
 <p align="center">
-  F1<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/fast1.png" width="300" />
-  F2<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/fast2.png" width="300" />
-  F3<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/fast3.png" width="300" />
-  F4<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/fast4.png" width="300" />
-  F5<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/fast5.png" width="300" />
-  F6<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/fast6.png" width="300" />
+  F1<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/fast1.png" width="250" />
+  F2<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/fast2.png" width="250" />
+  F3<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/fast3.png" width="250" />
+  F4<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/fast4.png" width="250" />
+  F5<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/fast5.png" width="250" />
+  F6<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/fast6.png" width="250" />
 </p>
 
-#### Example fastclean:
+#### fastclean:
 The heatmap created using the **fastclean** implementation. This is the **fast** implementation with a minimum number of configurations.
 * Fast
 * Not tweakable
@@ -133,11 +133,11 @@ fig_FC2 = imagesc.fastclean(df.values, cmap='rainbow')
 imagesc.savefig(fig_C1, './docs/figs/fastclean1.png')
 ```
 <p align="center">
-  F1<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/fastclean1.png" width="300" />
-  F2<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/fastclean2.png" width="300" />
+  F1<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/fastclean1.png" width="250" />
+  F2<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/fastclean2.png" width="250" />
 </p>
 
-#### Example plot:
+#### plot:
 The heatmap created using the **plot** implementation will behave more-or-less as the one of matlab.
 * Medium speed
 * Tweakable but less then **seaborn**
@@ -160,19 +160,20 @@ fig_M10 = imagesc.plot(df.values, df.index.values, df.columns.values, grid=True,
 imagesc.savefig(fig, './docs/figs/plot10.png')imagesc.savefig(fig_C1, './docs/figs/fast1.png')
 ```
 <p align="center">
-  M1<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/plot1.png" width="300" />
-  M2<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/plot2.png" width="300" />
-  M3<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/plot3.png" width="300" />
+  M1<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/plot1.png" width="250" />
+  M2<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/plot2.png" width="250" />
   <br>
-  M4<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/plot4.png" width="300" />
-  M5<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/plot5.png" width="300" />
-  M6<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/plot6.png" width="300" />
+  M3<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/plot3.png" width="250" />
+  M4<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/plot4.png" width="250" />
   <br>
-  M7<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/plot7.png" width="300" />
-  M8<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/plot8.png" width="300" />
-  M9<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/plot9.png" width="300" />
+  M5<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/plot5.png" width="250" />
+  M6<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/plot6.png" width="250" />
   <br>
-  M10<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/plot10.png" width="300" />
+  M7<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/plot7.png" width="250" />
+  M8<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/plot8.png" width="250" />
+  <br>
+  M9<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/plot9.png" width="250" />
+  M10<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/plot10.png" width="250" />
 </p>
 
 
