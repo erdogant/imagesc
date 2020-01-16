@@ -148,6 +148,25 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 
+# %% Adjust figure size based on input
+def _set_figsize(data_shape, figsize):
+    # ratio_data=np.max(data_shape)/np.min(data_shape)
+    # width_min=np.maximum(np.ceil(5*ratio_data), 5)
+    # height_min=np.maximum(np.ceil(15*ratio_fig), 15)
+    # width_min=figsize[0]
+    # height_min=figsize[1]
+    # data_ratio=data_shape[0]/data_shape[1]
+    data_ratio=np.minimum(5/(data_shape[0]/data_shape[1]),50)
+    figsize=tuple(np.ceil(np.interp(data_shape-np.min(data_shape), [np.min(figsize),data_ratio],[np.max(figsize),data_ratio])))
+    # (5/data_ratio)
+    # (5/data_ratio)*15
+    
+    # tuple(np.interp([figsize[0],figsize[1]], (data_shape[0],data_shape[1]), (data_shape[0],data_shape[1])))
+    # return tuple(np.interp([1,15], data_shape,data_shape))
+    return(figsize[1],figsize[0])
+    
+    # return tuple(np.interp([data_shape[0],data_shape[1]], (5,15), (5,15)))
+    
 #%% General plot
 def plot(data, row_labels=None, col_labels=None, **args):
     """Heatmap plot.
@@ -172,6 +191,8 @@ def plot(data, row_labels=None, col_labels=None, **args):
     assert not isinstance(data, pd.DataFrame), print('[IMAGESC] data input must be numpy array')
     # Set defaults
     args, args_im = _defaults(args)
+    # Set figsize based on data shape
+    args_im['figsize']=_set_figsize(data.shape, args_im['figsize'])
     # Linewidth if required
     args['linewidth']=_check_input(data, args['linewidth'], args_im)
     # Normalize
@@ -236,13 +257,14 @@ def seaborn(data, row_labels=None, col_labels=None, **args):
     sns.set(color_codes=True)
     sns.set(font_scale=1.2)
     sns.set_style({"savefig.dpi": args_im['dpi']})
-    # Figure
+    # Set figsize based on data shape
+    args_im['figsize']=_set_figsize(data.shape, args_im['figsize'])
     [fig,ax]=plt.subplots(figsize=args_im['figsize']) 
     # Make heatmap
     ax = sns.heatmap(df, **args)
     # Set labels
-    ax.set_xticklabels(df.columns.values, rotation=args_im['xtickRot'], ha='center', minor=False)
-    ax.set_yticklabels(df.index.values, rotation=args_im['ytickRot'], ha='right', minor=False)
+    # ax.set_xticklabels(df.columns.values, rotation=args_im['xtickRot'], ha='center', minor=False)
+    # ax.set_yticklabels(df.index.values, rotation=args_im['ytickRot'], ha='right', minor=False)
     # set the x-axis labels on the top
     if args_im['label_orientation']=='above': ax.xaxis.tick_top()
     fig = ax.get_figure()
@@ -291,7 +313,8 @@ def cluster(data, row_labels=None, col_labels=None, **args):
     sns.set(font_scale=1.2)
     sns.set_style({"savefig.dpi": args_im['dpi']})
 
-    # Figure
+    # Set figsize based on data shape
+    args_im['figsize']=_set_figsize(data.shape, args_im['figsize'])
     # Make heatmap
     g = sns.clustermap(df, method=args['linkage'], metric=args['distance'], col_cluster=True, row_cluster=True, linecolor=args['linecolor'], linewidths=args['linewidth'], cmap=args['cmap'], standard_scale=args['standard_scale'], vmin=args['vmin'], vmax=args['vmax'], figsize=args_im['figsize'])
     # Rotate labels
@@ -332,6 +355,8 @@ def fastclean(data, row_labels=None, col_labels=None, **args):
     # Normalize
     data = _normalize(data, args_im)
     # Plot
+    # Set figsize based on data shape
+    args_im['figsize']=_set_figsize(data.shape, args_im['figsize'])
     fig, ax = plt.subplots(figsize=args_im['figsize'])
     # Make the plot
     ax.pcolorfast(np.flipud(data), cmap=args['cmap'], vmin=args['vmin'], vmax=args['vmax'], alpha=1)
@@ -381,7 +406,10 @@ def fast(data, row_labels=None, col_labels=None, **args):
     # Normalize
     data = _normalize(data, args_im)
     # Plot
+    # Set figsize based on data shape
+    args_im['figsize']=_set_figsize(data.shape, args_im['figsize'])
     fig, ax = plt.subplots(figsize=args_im['figsize'])
+    print(args_im['figsize'])
     # Make the real plot
     im = ax.pcolorfast(np.flipud(data), cmap=args['cmap'], vmin=args['vmin'], vmax=args['vmax'], alpha=1)
 
@@ -429,7 +457,7 @@ def fast(data, row_labels=None, col_labels=None, **args):
 #%% Set defaults
 def _defaults(args):
     # Get function defaults
-    getdefaults={'axis':True,'grid':True,'normalize':False,'label_orientation':'below','verbose':3,'xtickRot':90,'ytickRot':0,'dpi':100,'figsize':(10,10)}
+    getdefaults={'axis':True,'grid':True,'normalize':False,'label_orientation':'below','verbose':3,'xtickRot':90,'ytickRot':0,'dpi':100,'figsize':(15,5)}
     args_im=dict()
     for getdefault in getdefaults:
         args_im.setdefault(getdefault, args.get(getdefault,getdefaults.get(getdefault)))
