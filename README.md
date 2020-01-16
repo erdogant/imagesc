@@ -7,6 +7,17 @@
 
 * imagesc is an Python package to create heatmaps. Various methods to create a heatmap are implemented, each with specific properties that can help to easily create your heatmap. The **fast** and **fastclean** method is optimized for speed, the **cluster** method provides clustering, the **seaborn** method contains many configuration settings, and finally, the **plot** as good as possible the imagesc from matlab.
 
+### Functions in imagesc
+```python
+# data is your numpy array
+fig = imagesc.seaborn(data)
+fig = imagesc.cluster(data)
+fig = imagesc.fast(data)
+fig = imagesc.clean(data)
+fig = imagesc.plot(data)
+status = imagesc.savefig(fig)
+```
+
 ## Contents
 - [Installation](#-installation)
 - [Requirements](#-Requirements)
@@ -22,7 +33,8 @@
 
 ## Requirements
 ```python
-pip install seaborn numpy pandas matplotlib
+pip install numpy pandas matplotlib seaborn
+Note that: seaborn is only required when using **seaborn** or **cluster** functions.
 or
 pip install -r requirements.txt
 ```
@@ -44,8 +56,7 @@ python setup.py install
 import imagesc as imagesc
 ```
 
-#### seaborn:
-* The heatmap implemented using **seaborn** contains a large number of configurations possibilities. 
+#### seaborn - The heatmap implemented using **seaborn** contains a large number of configurations possibilities. 
 * Slow when using large datasets.
 * Heatmap shape is square
 * Grid is aligned to the cells
@@ -66,8 +77,7 @@ D = imagesc.seaborn(df.values, df.index.values, df.columns.values, annot=True, a
 </p>
 
 
-#### cluster:
-* The heatmap created using the **cluster** implementation is usefull when you desire to cluster your data. 
+#### cluster - The heatmap created using the **cluster** implementation is usefull when you desire to cluster your data. 
 * Default distance setting: metric="euclidean", linkage="ward"
 * Slow for large data sets
 * Heatmap shape is square
@@ -91,8 +101,7 @@ imagesc.savefig(fig_C1, './docs/figs/cluster4.png')
 </p>
 
 
-#### fast:
-The heatmap created using the **fast** implementation
+#### fast - The heatmap created using the **fast** implementation
 * Fast
 * Not so much tweakable
 * Heatmap shape is square
@@ -118,10 +127,9 @@ imagesc.savefig(fig_C1, './docs/figs/fast1.png')
   F6<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/fast6.png" width="250" />
 </p>
 
-#### fastclean:
-The heatmap created using the **fastclean** implementation. This is the **fast** implementation with a minimum number of configurations.
+#### fastclean - The heatmap created using the **fastclean** implementation is fast and clean with almonst no configurations settings.
 * Fast
-* Not tweakable
+* Tweakable not so much
 * Heatmap shape is square
 * Grid is **not** aligned to the cells
 * Possible arguments: https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.axes.Axes.pcolorfast.html
@@ -137,8 +145,7 @@ imagesc.savefig(fig_C1, './docs/figs/fastclean1.png')
   F2<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/fastclean2.png" width="250" />
 </p>
 
-#### plot:
-The heatmap created using the **plot** implementation will behave more-or-less as the one of matlab.
+#### plot - The heatmap created using the **plot** implementation will behave more-or-less as the one of matlab.
 * Medium speed
 * Tweakable but less then **seaborn**
 * Heatmap shape changes based on the data
@@ -179,11 +186,11 @@ The heatmap based on plot will behave more-or-less as the one of matlab.
 import matplotlib.image as mpimg
 img=mpimg.imread('./docs/figs/lenna.png')
 
-fig = imagesc.fast(img)
-# runtime: 2.931 seconds
-
 fig = imagesc.fastclean(img)
-# runtime 8.029
+# runtime 1.49
+
+fig = imagesc.fast(img, cbar=False, axis=False)
+# runtime: 2.931 seconds
 
 fig = imagesc.plot(img, linewidth=0, cbar=False)
 # runtime: 11.042
@@ -215,6 +222,8 @@ https://seaborn.pydata.org/generated/seaborn.heatmap.html
 https://seaborn.pydata.org/generated/seaborn.clustermap.html
 * fast and fastclean
 https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.axes.Axes.pcolor.html
+* plot
+ https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.pyplot.imshow.html
 * Other
 https://matplotlib.org/3.1.1/gallery/images_contours_and_fields/image_annotated_heatmap.html
 * Colormap
