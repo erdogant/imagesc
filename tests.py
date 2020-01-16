@@ -12,8 +12,8 @@ import imagesc as imagesc
 
 # %%
 # df = pd.DataFrame(np.random.rand(10,15))
-df = pd.DataFrame(np.random.randint(0,100,size=(50,50)))
-df = pd.DataFrame(np.random.randint(0,100,size=(10,50)))
+df = pd.DataFrame(np.random.randint(0,100,size=(6,20)))
+# df = pd.DataFrame(np.random.randint(0,100,size=(5,25)))
 # df = pd.DataFrame(np.random.randint(0,100,size=(10,100)))
 
 # %% Seaborn
@@ -32,6 +32,8 @@ fig = imagesc.seaborn(df.values, df.index.values, df.columns.values, annot=True,
 imagesc.savefig(fig, './docs/figs/seaborn5.png')
 print('[%.3f] Seaborn' %(et.toc()))
 
+# fig = imagesc.seaborn(df.values, df.index.values, df.columns.values, annot=True, annot_kws={"size": 12}, cmap='rainbow', linecolor='#ffffff', linewidth=0, ytickRot=45, xtickRot=45)
+
 # %% Cluster
 et.tic()
 import imagesc as imagesc
@@ -44,6 +46,8 @@ imagesc.savefig(fig, './docs/figs/cluster3.png')
 fig = imagesc.cluster(df.values, df.index.values, df.columns.values, cmap='rainbow', linecolor='#ffffff', linewidth=0)
 imagesc.savefig(fig, './docs/figs/cluster4.png')
 print('[%.3f] Cluster' %(et.toc()))
+
+# fig = imagesc.cluster(df.values, df.index.values, df.columns.values, cmap='rainbow', linecolor='#ffffff', linewidth=0, ytickRot=45, xtickRot=45)
 
 # %% Fast
 et.tic()
@@ -62,6 +66,8 @@ fig = imagesc.fast(df.values, df.index.values, df.columns.values, cmap='rainbow'
 imagesc.savefig(fig, './docs/figs/fast6.png')
 print('[%.3f] Fast' %(et.toc()))
 
+# fig = imagesc.fast(df.values, df.index.values, df.columns.values, cmap='rainbow', linewidth=0.5, grid=True, ytickRot=45, xtickRot=45)
+
 # %% Clean: Best for plotting photos
 et.tic()
 import imagesc as imagesc
@@ -74,7 +80,8 @@ print('[%.3f] Clean and fast' %(et.toc()))
 # %% Matlab-like plots
 et.tic()
 
-df = pd.DataFrame(np.random.randint(0,100,size=(50,50)))
+# df = pd.DataFrame(np.random.randint(0,100,size=(50,50)))
+import imagesc as imagesc
 
 fig = imagesc.plot(df.values)
 imagesc.savefig(fig, './docs/figs/plot1.png')

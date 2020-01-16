@@ -157,13 +157,13 @@ def _set_figsize(data_shape, figsize):
     # height_min=figsize[1]
     # data_ratio=data_shape[0]/data_shape[1]
     data_ratio=np.minimum(5/(data_shape[0]/data_shape[1]),50)
-    figsize=tuple(np.ceil(np.interp(data_shape-np.min(data_shape), [np.min(figsize),data_ratio],[np.max(figsize),data_ratio])))
+    out=tuple(np.ceil(np.interp(data_shape-np.min(data_shape), [np.min(figsize),data_ratio],[np.max(figsize),data_ratio])))
     # (5/data_ratio)
     # (5/data_ratio)*15
     
     # tuple(np.interp([figsize[0],figsize[1]], (data_shape[0],data_shape[1]), (data_shape[0],data_shape[1])))
     # return tuple(np.interp([1,15], data_shape,data_shape))
-    return(figsize[1],figsize[0])
+    return(out[0],out[1])
     
     # return tuple(np.interp([data_shape[0],data_shape[1]], (5,15), (5,15)))
     
@@ -242,6 +242,7 @@ def seaborn(data, row_labels=None, col_labels=None, **args):
     # Normalize
     data = _normalize(data, args_im)
 
+
     # Cleaning args
     try:
         args.pop('standard_scale')
@@ -258,13 +259,13 @@ def seaborn(data, row_labels=None, col_labels=None, **args):
     sns.set(font_scale=1.2)
     sns.set_style({"savefig.dpi": args_im['dpi']})
     # Set figsize based on data shape
-    args_im['figsize']=_set_figsize(data.shape, args_im['figsize'])
+    # args_im['figsize']=_set_figsize(data.shape, args_im['figsize'])
     [fig,ax]=plt.subplots(figsize=args_im['figsize']) 
     # Make heatmap
     ax = sns.heatmap(df, **args)
-    # Set labels
-    # ax.set_xticklabels(df.columns.values, rotation=args_im['xtickRot'], ha='center', minor=False)
-    # ax.set_yticklabels(df.index.values, rotation=args_im['ytickRot'], ha='right', minor=False)
+    # Rotate labels
+    # ax.set_xticklabels(col_labels, rotation=args_im['xtickRot'], ha='center', minor=False)
+    # ax.set_yticklabels(row_labels, rotation=args_im['ytickRot'], ha='right', minor=False)
     # set the x-axis labels on the top
     if args_im['label_orientation']=='above': ax.xaxis.tick_top()
     fig = ax.get_figure()
@@ -312,14 +313,18 @@ def cluster(data, row_labels=None, col_labels=None, **args):
     sns.set(color_codes=True)
     sns.set(font_scale=1.2)
     sns.set_style({"savefig.dpi": args_im['dpi']})
-
     # Set figsize based on data shape
-    args_im['figsize']=_set_figsize(data.shape, args_im['figsize'])
+    # args_im['figsize']=_set_figsize(data.shape, args_im['figsize'])
     # Make heatmap
     g = sns.clustermap(df, method=args['linkage'], metric=args['distance'], col_cluster=True, row_cluster=True, linecolor=args['linecolor'], linewidths=args['linewidth'], cmap=args['cmap'], standard_scale=args['standard_scale'], vmin=args['vmin'], vmax=args['vmax'], figsize=args_im['figsize'])
     # Rotate labels
-    plt.setp(g.ax_heatmap.get_yticklabels(), rotation=args_im['ytickRot'])
-    plt.setp(g.ax_heatmap.get_xticklabels(), rotation=args_im['xtickRot'])
+    plt.setp(g.ax_heatmap.get_xticklabels(), rotation=args_im['xtickRot'], ha='center')
+    plt.setp(g.ax_heatmap.get_yticklabels(), rotation=args_im['ytickRot'], ha='center')
+    # g.set_xticklabels(col_labels, rotation=args_im['xtickRot'], ha='center', minor=False)
+    # g.set_yticklabels(row_labels, rotation=args_im['ytickRot'], ha='right', minor=False)
+    # plt.rc('xtick', labelsize=14)    # fontsize of the tick labels
+    # plt.rc('axes', labelsize=14)    # fontsize of the x and y labels
+
     # Plot
     plt.show()
     # Return
@@ -407,9 +412,10 @@ def fast(data, row_labels=None, col_labels=None, **args):
     data = _normalize(data, args_im)
     # Plot
     # Set figsize based on data shape
-    args_im['figsize']=_set_figsize(data.shape, args_im['figsize'])
+    # args_im['figsize']=_set_figsize(data.shape, args_im['figsize'])
     fig, ax = plt.subplots(figsize=args_im['figsize'])
-    print(args_im['figsize'])
+
+    # print(args_im['figsize'])
     # Make the real plot
     im = ax.pcolorfast(np.flipud(data), cmap=args['cmap'], vmin=args['vmin'], vmax=args['vmax'], alpha=1)
 
@@ -417,7 +423,6 @@ def fast(data, row_labels=None, col_labels=None, **args):
     if args['cbar']:
         ax.figure.colorbar(im, ax=ax)
         # cbar.ax.set_ylabel(cbarlabel='', rotation=-90, va="bottom")
-
     # Show all ticks and label with the respective list entries.
     if not col_labels is None:
         ax.set_xticks(np.arange(data.shape[1]))
@@ -428,11 +433,17 @@ def fast(data, row_labels=None, col_labels=None, **args):
         if args_im['label_orientation']=='below':
             ax.tick_params(top=True, bottom=True, labeltop=False, labelbottom=True)
         # Rotate the tick labels and set their alignment.
-        plt.setp(ax.get_xticklabels(), rotation=args_im['xtickRot'], ha="right", rotation_mode="anchor")
+        plt.setp(ax.get_xticklabels(), rotation=args_im['xtickRot'], ha="center", rotation_mode="anchor")
+
+    # Rotate labels
+    # ax.set_xticklabels(col_labels, rotation=args_im['xtickRot'], ha='center', minor=False)
+    # ax.set_yticklabels(row_labels, rotation=args_im['ytickRot'], ha='right', minor=False)
 
     if not row_labels is None:
         ax.set_yticks(np.arange(data.shape[0]))
         ax.set_yticklabels(row_labels)
+        plt.setp(ax.get_yticklabels(), rotation=args_im['ytickRot'], ha="right", rotation_mode="anchor")
+
 
     # Turn spines off and create white grid.
     # for edge, spine in ax.spines.items():
@@ -441,75 +452,14 @@ def fast(data, row_labels=None, col_labels=None, **args):
     if args_im['grid']:
         ax.set_xticks(np.arange(data.shape[1]+1)-.5, minor=True)
         ax.set_yticks(np.arange(data.shape[0]+1)-.5, minor=True)
-
     if args['linewidth']>0 and args_im['grid']:
         ax.grid(which="minor", color=args['linecolor'], linestyle='-', linewidth=args['linewidth'])
     if args_im['axis']==False:
         plt.axis('off')
-    # if args_im['grid']==False:
     ax.grid(False)
-
-    # ax.tick_params(which="minor", bottom=False, left=False)
 
     # Return
     return(fig)
-
-#%% Set defaults
-def _defaults(args):
-    # Get function defaults
-    getdefaults={'axis':True,'grid':True,'normalize':False,'label_orientation':'below','verbose':3,'xtickRot':90,'ytickRot':0,'dpi':100,'figsize':(15,5)}
-    args_im=dict()
-    for getdefault in getdefaults:
-        args_im.setdefault(getdefault, args.get(getdefault,getdefaults.get(getdefault)))
-        try:
-            args.pop(getdefault)
-        except:
-            pass
-                
-    # Scaling
-    args.setdefault('standard_scale', args.get('standard_scale',False))
-    args.setdefault('cbar',True)
-    args.setdefault('linewidth',0.1)
-    args.setdefault('annot',False)
-    args.setdefault('linecolor','#000000')
-    args.setdefault('cmap','coolwarm')
-    args.setdefault('vmin',None)
-    args.setdefault('vmax',None)
-    args.setdefault('distance','euclidean')
-    args.setdefault('linkage','ward')
-    # Return
-    return(args, args_im)
-
-# %% Check input
-def _check_input(data, linewidth, args_im):
-    # Must be >0
-    if linewidth<0: linewidth=0
-    # Check cols and rows with linewidth
-    if ((data.shape[0]>100) or (data.shape[1]>100)) and (linewidth>0):
-        if args_im['verbose']>=2: print('[IMAGESC] WARNING: Plot will be poorly visible if [linewidth>0] with rows/columns>100. Set linewidth=0 to adjust. [auto-adjusting...]' )
-        linewidth=0
-    
-    return(linewidth)
-
-# %% Check input
-def _normalize(data, args_im):
-    if args_im['normalize']:
-        if args_im['verbose'] >=3: print('[IMAGESC] Normalzing data..' )
-        data = (data - data.mean()) / (data.max() - data.min())
-    return(data)
-
-# %%
-def set_labels(data_shape, row_labels, col_labels):
-    if row_labels is None:
-        row_labels = np.arange(0,data_shape[0])
-    if col_labels is None:
-        col_labels = np.arange(0,data_shape[1])
-    return(row_labels, col_labels)
-
-#%%
-# def _extents(f):
-  # delta = f[1] - f[0]
-  # return [f[0] - delta/2, f[-1] + delta/2]
 
 # %%
 def _heatmap(data, row_labels, col_labels, args_im, **args):
@@ -569,8 +519,14 @@ def _heatmap(data, row_labels, col_labels, args_im, **args):
 
     # Create colorbar
     if args_im['cbar']:
-        cbar = ax.figure.colorbar(im, ax=ax, **cbar_kw)
-        cbar.ax.set_ylabel(cbarlabel, rotation=-90, va="bottom")
+        # cbar = ax.figure.colorbar(im, ax=ax, **cbar_kw)
+        # cbar.ax.set_ylabel(cbarlabel, rotation=-90, va="bottom")
+        # create an axes on the right side of ax. The width of cax will be 5%
+        # of ax and the padding between cax and ax will be fixed at 0.05 inch.
+        from mpl_toolkits.axes_grid1 import make_axes_locatable
+        divider = make_axes_locatable(ax)
+        cax = divider.append_axes("right", size="5%", pad=0.05)
+        plt.colorbar(im, cax=cax)
 
     # We want to show all ticks...
     if not col_labels is None:
@@ -582,11 +538,13 @@ def _heatmap(data, row_labels, col_labels, args_im, **args):
         if args_im['label_orientation']=='below':
             ax.tick_params(top=True, bottom=True, labeltop=False, labelbottom=True)
         # Rotate the tick labels and set their alignment.
-        plt.setp(ax.get_xticklabels(), rotation=args_im['xtickRot'], ha="right", rotation_mode="anchor")
+        # plt.setp(ax.get_xticklabels(), rotation=args_im['xtickRot'], ha="right", rotation_mode="anchor")
+        ax.set_xticklabels(col_labels, rotation=args_im['xtickRot'], ha='center', minor=False)
 
     if not row_labels is None:
         ax.set_yticks(np.arange(data.shape[0]))
         ax.set_yticklabels(row_labels)
+        ax.set_yticklabels(row_labels, rotation=args_im['ytickRot'], ha='right', minor=False)
 
     # Turn spines off and create white grid.
     # for edge, spine in ax.spines.items():
@@ -597,16 +555,72 @@ def _heatmap(data, row_labels, col_labels, args_im, **args):
         ax.set_xticks(np.arange(data.shape[1]+1)-.5, minor=True)
         # if not row_labels is None:
         ax.set_yticks(np.arange(data.shape[0]+1)-.5, minor=True)
-
-        
     if args_im['linewidth']>0 and args_im['grid']:
         ax.grid(which="minor", color=args_im['linecolor'], linestyle='-', linewidth=args_im['linewidth'])
     if args_im['axis']==False:
         plt.axis('off')
-    # if args_im['grid']==False:
     ax.grid(False)
 
     return(im)
+
+
+#%% Set defaults
+def _defaults(args):
+    # Get function defaults
+    getdefaults={'axis':True,'grid':True,'normalize':False,'label_orientation':'below','verbose':3,'xtickRot':90,'ytickRot':0,'dpi':100,'figsize':(15,5)}
+    args_im=dict()
+    for getdefault in getdefaults:
+        args_im.setdefault(getdefault, args.get(getdefault,getdefaults.get(getdefault)))
+        try:
+            args.pop(getdefault)
+        except:
+            pass
+                
+    # Scaling
+    args.setdefault('standard_scale', args.get('standard_scale',False))
+    args.setdefault('cbar',True)
+    args.setdefault('linewidth',0.1)
+    args.setdefault('annot',False)
+    args.setdefault('linecolor','#000000')
+    args.setdefault('cmap','coolwarm')
+    args.setdefault('vmin',None)
+    args.setdefault('vmax',None)
+    args.setdefault('distance','euclidean')
+    args.setdefault('linkage','ward')
+    # Return
+    return(args, args_im)
+
+# %% Check input
+def _check_input(data, linewidth, args_im):
+    # Must be >0
+    if linewidth<0: linewidth=0
+    # Check cols and rows with linewidth
+    if ((data.shape[0]>100) or (data.shape[1]>100)) and (linewidth>0):
+        if args_im['verbose']>=2: print('[IMAGESC] WARNING: Plot will be poorly visible if [linewidth>0] with rows/columns>100. Set linewidth=0 to adjust. [auto-adjusting...]' )
+        linewidth=0
+    
+    return(linewidth)
+
+# %% Check input
+def _normalize(data, args_im):
+    if args_im['normalize']:
+        if args_im['verbose'] >=3: print('[IMAGESC] Normalzing data..' )
+        data = (data - data.mean()) / (data.max() - data.min())
+    return(data)
+
+# %%
+def set_labels(data_shape, row_labels, col_labels):
+    if row_labels is None:
+        row_labels = np.arange(0,data_shape[0])
+    if col_labels is None:
+        col_labels = np.arange(0,data_shape[1])
+    return(row_labels, col_labels)
+
+#%%
+# def _extents(f):
+  # delta = f[1] - f[0]
+  # return [f[0] - delta/2, f[-1] + delta/2]
+
 
 # %%
 def _annotate_heatmap(im, data=None, valfmt="{x:.2f}", textcolors=["black", "white"], threshold=None, **textkw):
