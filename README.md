@@ -58,7 +58,6 @@ import imagesc as imagesc
 
 #### seaborn - The heatmap implemented using **seaborn** contains a large number of configurations possibilities. 
 * Slow when using large datasets.
-* Heatmap shape is square
 * Grid is aligned to the cells
 * See here for all parameters: https://seaborn.pydata.org/generated/seaborn.heatmap.html
 
@@ -80,7 +79,6 @@ D = imagesc.seaborn(df.values, df.index.values, df.columns.values, annot=True, a
 #### cluster - The heatmap created using the **cluster** implementation is usefull when you desire to cluster your data. 
 * Default distance setting: metric="euclidean", linkage="ward"
 * Slow for large data sets
-* Heatmap shape is square
 * Grid is aligned to the cells
 * Possibilities to tweak
 * Possible arguments: https://seaborn.pydata.org/generated/seaborn.clustermap.html
@@ -104,7 +102,6 @@ imagesc.savefig(fig_C1, './docs/figs/cluster4.png')
 #### fast - The heatmap created using the **fast** implementation
 * Fast
 * Not so much tweakable
-* Heatmap shape is square
 * Grid is **not** aligned to the cells
 * Possible arguments: https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.axes.Axes.pcolorfast.html
 
@@ -130,7 +127,6 @@ imagesc.savefig(fig_C1, './docs/figs/fast1.png')
 #### fastclean - The heatmap created using the **fastclean** implementation is fast and clean with almonst no configurations settings.
 * Fast
 * Tweakable not so much
-* Heatmap shape is square
 * No Grid
 * Possible arguments: https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.axes.Axes.pcolorfast.html
 
@@ -148,7 +144,6 @@ imagesc.savefig(fig_C1, './docs/figs/fastclean1.png')
 #### plot - The heatmap created using the **plot** implementation will behave more-or-less as the one of matlab.
 * Medium speed
 * Tweakable but less then **seaborn**
-* Heatmap shape changes based on the data
 * Grid is aligned to the cells
 * Possible arguments: https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.pyplot.imshow.html
 
