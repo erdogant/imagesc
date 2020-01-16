@@ -131,7 +131,7 @@ imagesc.savefig(fig_C1, './docs/figs/fast1.png')
 * Fast
 * Tweakable not so much
 * Heatmap shape is square
-* Grid is **not** aligned to the cells
+* No Grid
 * Possible arguments: https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.axes.Axes.pcolorfast.html
 
 ```python
@@ -180,7 +180,7 @@ imagesc.savefig(fig, './docs/figs/plot10.png')imagesc.savefig(fig_C1, './docs/fi
 </p>
 
 
-#### Timing:
+#### Speed:
 The heatmap based on plot will behave more-or-less as the one of matlab.
 ```python
 import matplotlib.image as mpimg
