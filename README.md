@@ -162,16 +162,12 @@ imagesc.savefig(fig, './docs/figs/plot10.png')imagesc.savefig(fig_C1, './docs/fi
 <p align="center">
   M1<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/plot1.png" width="250" />
   M2<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/plot2.png" width="250" />
-  <br>
   M3<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/plot3.png" width="250" />
   M4<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/plot4.png" width="250" />
-  <br>
   M5<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/plot5.png" width="250" />
   M6<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/plot6.png" width="250" />
-  <br>
   M7<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/plot7.png" width="250" />
   M8<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/plot8.png" width="250" />
-  <br>
   M9<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/plot9.png" width="250" />
   M10<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/plot10.png" width="250" />
 </p>
@@ -191,7 +187,6 @@ fig = imagesc.fastclean(img)
 
 fig = imagesc.plot(img, linewidth=0, cbar=False)
 # runtime: 11.042
-
 ```
 
 <p align="center">
