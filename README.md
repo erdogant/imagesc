@@ -56,7 +56,7 @@ python setup.py install
 import imagesc as imagesc
 ```
 
-#### seaborn
+### seaborn
 * Underlying implemented is based on **seaborn**
 * Large number of configurations
 * Slow when using large datasets
@@ -78,7 +78,7 @@ D = imagesc.seaborn(df.values, df.index.values, df.columns.values, annot=True, a
 </p>
 
 
-#### cluster
+### cluster
 * Underlying implemented is based on **clustermap** 
 * When you desire to cluster your heatmap
 * Default distance setting: metric="euclidean", linkage="ward" (can be changed)
@@ -103,7 +103,7 @@ imagesc.savefig(fig_C1, './docs/figs/cluster4.png')
 </p>
 
 
-#### fast
+### fast
 * Underlying implemented is based on **pcolorfast** 
 * Fast
 * Not so much tweakable
@@ -129,7 +129,7 @@ imagesc.savefig(fig_C1, './docs/figs/fast1.png')
   F6<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/fast6.png" width="300" />
 </p>
 
-#### fastclean
+### fastclean
 * Underlying implemented is based on **pcolorfast** 
 * Fast
 * No Grid
@@ -148,7 +148,7 @@ imagesc.savefig(fig_C1, './docs/figs/fastclean1.png')
   F2<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/fastclean2.png" width="300" />
 </p>
 
-#### plot
+### plot
 * Underlying implemented is based on **imshow** 
 * implementation will behave more-or-less as the one of matlab
 * Medium speed
@@ -184,7 +184,7 @@ imagesc.savefig(fig, './docs/figs/plot10.png')imagesc.savefig(fig_C1, './docs/fi
 </p>
 
 
-#### Speed:
+### Speed:
 The heatmap based on plot will behave more-or-less as the one of matlab.
 ```python
 import matplotlib.image as mpimg
