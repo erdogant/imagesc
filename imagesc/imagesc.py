@@ -331,7 +331,7 @@ def cluster(data, row_labels=None, col_labels=None, **args):
     return(g.fig)
 
 # %% Clean
-def fastclean(data, row_labels=None, col_labels=None, **args):
+def clean(data, row_labels=None, col_labels=None, **args):
     """Clean heatmap figure.
 
 

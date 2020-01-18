@@ -71,10 +71,10 @@ print('[%.3f] Fast' %(et.toc()))
 # %% Clean: Best for plotting photos
 et.tic()
 import imagesc as imagesc
-fig = imagesc.fastclean(df.values)
-imagesc.savefig(fig, './docs/figs/fastclean1.png')
-fig = imagesc.fastclean(df.values, cmap='rainbow')
-imagesc.savefig(fig, './docs/figs/fastclean2.png')
+fig = imagesc.clean(df.values)
+imagesc.savefig(fig, './docs/figs/clean1.png')
+fig = imagesc.clean(df.values, cmap='rainbow')
+imagesc.savefig(fig, './docs/figs/clean2.png')
 print('[%.3f] Clean and fast' %(et.toc()))
 
 # %% Matlab-like plots
@@ -116,8 +116,8 @@ imagesc.savefig(fig, './docs/figs/fast_lenna.png')
 print('[%.3f] fast' %(et.toc()))
 
 et.tic()
-fig = imagesc.fastclean(img)
-print('[%.3f] fastclean' %(et.toc()))
+fig = imagesc.clean(img)
+print('[%.3f] clean' %(et.toc()))
 
 et.tic()
 fig = imagesc.plot(img, linewidth=0, cbar=False, axis=False)
@@ -129,7 +129,7 @@ from tqdm import tqdm
 t_seaborn=[]
 t_cluster=[]
 t_fast=[]
-t_fastclean=[]
+t_clean=[]
 t_plot=[]
 arraysizes=np.arange(50,1250,250)
 
@@ -150,8 +150,8 @@ for i in tqdm(arraysizes):
     t_fast.append(et.toc())
     
     et.tic()
-    fig = imagesc.fastclean(df.values, verbose=0)
-    t_fastclean.append(et.toc())
+    fig = imagesc.clean(df.values, verbose=0)
+    t_clean.append(et.toc())
     
     et.tic()
     fig = imagesc.plot(df.values, verbose=0)
@@ -161,7 +161,7 @@ plt.figure(figsize=(20,8))
 plt.plot(t_seaborn, label='seaborn')
 plt.plot(t_cluster, label='cluster')
 plt.plot(t_fast, label='fast')
-plt.plot(t_fastclean, label='fastclean')
+plt.plot(t_clean, label='clean')
 plt.plot(t_plot, label='plot')
 plt.legend()
 plt.xlabel('array size')
