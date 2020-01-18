@@ -56,8 +56,10 @@ python setup.py install
 import imagesc as imagesc
 ```
 
-#### seaborn - The heatmap implemented using **seaborn** contains a large number of configurations possibilities. 
-* Slow when using large datasets.
+#### seaborn
+* Underlying implemented is based on **seaborn**
+* Large number of configurations
+* Slow when using large datasets
 * Grid is aligned to the cells
 * See here for all parameters: https://seaborn.pydata.org/generated/seaborn.heatmap.html
 
@@ -76,8 +78,10 @@ D = imagesc.seaborn(df.values, df.index.values, df.columns.values, annot=True, a
 </p>
 
 
-#### cluster - The heatmap created using the **cluster** implementation is usefull when you desire to cluster your data. 
-* Default distance setting: metric="euclidean", linkage="ward"
+#### cluster
+* Underlying implemented is based on **clustermap** 
+* When you desire to cluster your heatmap
+* Default distance setting: metric="euclidean", linkage="ward" (can be changed)
 * Slow for large data sets
 * Grid is aligned to the cells
 * Possibilities to tweak
@@ -99,7 +103,8 @@ imagesc.savefig(fig_C1, './docs/figs/cluster4.png')
 </p>
 
 
-#### fast - The heatmap created using the **fast** implementation
+#### fast
+* Underlying implemented is based on **pcolorfast** 
 * Fast
 * Not so much tweakable
 * Grid is **not** aligned to the cells
@@ -124,10 +129,12 @@ imagesc.savefig(fig_C1, './docs/figs/fast1.png')
   F6<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/fast6.png" width="300" />
 </p>
 
-#### fastclean - The heatmap created using the **fastclean** implementation is fast and clean with almonst no configurations settings.
+#### fastclean
+* Underlying implemented is based on **pcolorfast** 
 * Fast
-* Tweakable not so much
 * No Grid
+* Limited configurations
+* Ideal for photos
 * Possible arguments: https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.axes.Axes.pcolorfast.html
 
 ```python
@@ -141,9 +148,11 @@ imagesc.savefig(fig_C1, './docs/figs/fastclean1.png')
   F2<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/fastclean2.png" width="300" />
 </p>
 
-#### plot - The heatmap created using the **plot** implementation will behave more-or-less as the one of matlab.
+#### plot
+* Underlying implemented is based on **imshow** 
+* implementation will behave more-or-less as the one of matlab
 * Medium speed
-* Tweakable but less then **seaborn**
+* Various configurations are possible but less then **seaborn**
 * Grid is aligned to the cells
 * Possible arguments: https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.pyplot.imshow.html
 
