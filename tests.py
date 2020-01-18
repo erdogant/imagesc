@@ -124,7 +124,48 @@ fig = imagesc.plot(img, linewidth=0, cbar=False, axis=False)
 imagesc.savefig(fig, './docs/figs/plot_lenna1.png')
 print('[%.3f] plot' %(et.toc()))
 
-# et.tic()
-# fig = imagesc.plot(img, linewidth=0, cbar=False, axis=False)
-# # imagesc.savefig(fig, './docs/figs/plot_lenna2.png')
-# print('[%.3f] Default' %(et.toc()))
+#%% Timings with arrays
+from tqdm import tqdm
+t_seaborn=[]
+t_cluster=[]
+t_fast=[]
+t_fastclean=[]
+t_plot=[]
+arraysizes=np.arange(50,1250,250)
+
+for i in tqdm(arraysizes):
+    arrsize=(i,i)
+    df = pd.DataFrame(np.random.randint(0,100,size=arrsize))
+
+    et.tic()
+    fig = imagesc.seaborn(df.values, verbose=0)
+    t_seaborn.append(et.toc())
+    
+    et.tic()
+    fig = imagesc.cluster(df.values, verbose=0)
+    t_cluster.append(et.toc())
+    
+    et.tic()
+    fig = imagesc.fast(df.values, verbose=0)
+    t_fast.append(et.toc())
+    
+    et.tic()
+    fig = imagesc.fastclean(df.values, verbose=0)
+    t_fastclean.append(et.toc())
+    
+    et.tic()
+    fig = imagesc.plot(df.values, verbose=0)
+    t_plot.append(et.toc())
+
+plt.figure(figsize=(20,8))
+plt.plot(t_seaborn, label='seaborn')
+plt.plot(t_cluster, label='cluster')
+plt.plot(t_fast, label='fast')
+plt.plot(t_fastclean, label='fastclean')
+plt.plot(t_plot, label='plot')
+plt.legend()
+plt.xlabel('array size')
+plt.ylabel('time in seconds')
+plt.xticks(ticks=np.arange(0,len(arraysizes)), labels=arraysizes)
+imagesc.savefig(fig, './docs/figs/time_in_secs.png')
+
