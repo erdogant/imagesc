@@ -2,7 +2,7 @@ from imagesc.imagesc import (
     seaborn,
     cluster,
     fast,
-    fastclean,
+    clean,
     plot)
 
 from imagesc.savefig import savefig
