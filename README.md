@@ -204,7 +204,7 @@ fig = imagesc.plot(img, linewidth=0, cbar=False)
   **plot**<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/plot_lenna1.png" width="300" />
 </p>
 <p align="center">
-  <img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/time_in_secs.png" width="600" />
+  <img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/time_in_secs.png" width="1000" />
 </p>
 
 
