@@ -198,11 +198,13 @@ fig = imagesc.fast(img, cbar=False, axis=False)
 fig = imagesc.plot(img, linewidth=0, cbar=False)
 # runtime: 11.042
 ```
-
 <p align="center">
   **fast**<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/fast_lenna.png" width="300" />
   **fastclean**<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/fastclean_lenna.png" width="300" />
   **plot**<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/plot_lenna1.png" width="300" />
+</p>
+<p align="center">
+  **fast**<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/time_in_secs.png" width="300" />
 </p>
 
 
