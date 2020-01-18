@@ -239,5 +239,5 @@ https://matplotlib.org/examples/color/colormaps_reference.html
 ## Contribute
 * Contributions are welcome.
 
-## © Copyright
+## Licence
 See [LICENSE](LICENSE) for details.
