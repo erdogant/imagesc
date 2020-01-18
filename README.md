@@ -185,7 +185,6 @@ imagesc.savefig(fig, './docs/figs/plot10.png')imagesc.savefig(fig_C1, './docs/fi
 
 
 ## Speed:
-The heatmap based on plot will behave more-or-less as the one of matlab.
 ```python
 import matplotlib.image as mpimg
 img=mpimg.imread('./docs/figs/lenna.png')
