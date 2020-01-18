@@ -5,7 +5,7 @@
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/erdogant/imagesc/blob/master/LICENSE)
 [![Downloads](https://pepy.tech/badge/imagesc/week)](https://pepy.tech/project/imagesc/week)
 
-* imagesc is an Python package to create heatmaps. Various methods to create a heatmap are implemented, each with specific properties that can help to easily create your heatmap. The **fast** and **fastclean** method is optimized for speed, the **cluster** method provides clustering, the **seaborn** method contains many configuration settings, and finally, the **plot** as good as possible the imagesc from matlab.
+* imagesc is an Python package to create heatmaps. Various methods to create a heatmap are implemented, each with specific properties that can help to easily create your heatmap. The **fast** and **clean** method is optimized for speed, the **cluster** method provides clustering, the **seaborn** method contains many configuration settings, and finally, the **plot** as good as possible the imagesc from matlab.
 
 ### Functions in imagesc
 ```python
@@ -129,7 +129,7 @@ imagesc.savefig(fig_C1, './docs/figs/fast1.png')
   F6<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/fast6.png" width="300" />
 </p>
 
-## fastclean
+## clean
 * Underlying implemented is based on **pcolorfast** 
 * Fast
 * No Grid
@@ -139,13 +139,13 @@ imagesc.savefig(fig_C1, './docs/figs/fast1.png')
 
 ```python
 df = pd.DataFrame(np.random.randint(0,100,size=(10,20)))
-fig_FC1 = imagesc.fastclean(df.values)
-fig_FC2 = imagesc.fastclean(df.values, cmap='rainbow')
-imagesc.savefig(fig_C1, './docs/figs/fastclean1.png')
+fig_FC1 = imagesc.clean(df.values)
+fig_FC2 = imagesc.clean(df.values, cmap='rainbow')
+imagesc.savefig(fig_C1, './docs/figs/clean1.png')
 ```
 <p align="center">
-  F1<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/fastclean1.png" width="300" />
-  F2<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/fastclean2.png" width="300" />
+  F1<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/clean1.png" width="300" />
+  F2<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/clean2.png" width="300" />
 </p>
 
 ## plot
@@ -189,7 +189,7 @@ imagesc.savefig(fig, './docs/figs/plot10.png')imagesc.savefig(fig_C1, './docs/fi
 import matplotlib.image as mpimg
 img=mpimg.imread('./docs/figs/lenna.png')
 
-fig = imagesc.fastclean(img)
+fig = imagesc.clean(img)
 # runtime 1.49
 
 fig = imagesc.fast(img, cbar=False, axis=False)
@@ -200,11 +200,11 @@ fig = imagesc.plot(img, linewidth=0, cbar=False)
 ```
 <p align="center">
   **fast**<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/fast_lenna.png" width="300" />
-  **fastclean**<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/fastclean_lenna.png" width="300" />
+  **clean**<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/clean_lenna.png" width="300" />
   **plot**<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/plot_lenna1.png" width="300" />
 </p>
 <p align="center">
-  **fast**<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/time_in_secs.png" width="300" />
+  <img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/time_in_secs.png" width="1000" />
 </p>
 
 
@@ -225,7 +225,7 @@ Please cite imagesc in your publications if this is useful for your research. He
 https://seaborn.pydata.org/generated/seaborn.heatmap.html
 * clustermap
 https://seaborn.pydata.org/generated/seaborn.clustermap.html
-* fast and fastclean
+* fast and clean
 https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.axes.Axes.pcolor.html
 * plot
  https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.pyplot.imshow.html
