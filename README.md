@@ -34,8 +34,8 @@ status = imagesc.savefig(fig)
 ## Requirements
 ```python
 pip install numpy pandas matplotlib seaborn
-Note that: seaborn is only required when using **seaborn** or **cluster** functions.
-or
+# Note that: seaborn is only required when using **seaborn** or **cluster** functions.
+# or
 pip install -r requirements.txt
 ```
 
