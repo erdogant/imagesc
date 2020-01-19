@@ -1,5 +1,2 @@
-#include versioneer.py
-#include imagesc/_version.py
-
 include imagesc/data/*.zip
 include imagesc/data/*.txt

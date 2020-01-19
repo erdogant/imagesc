@@ -1,7 +1,15 @@
 import setuptools
-#import versioneer
-new_version='0.1.5'
+import re
 
+# Version control --------
+VERSIONFILE="imagesc/__init__.py"
+getversion = re.search( r"^__version__ = ['\"]([^'\"]*)['\"]", open(VERSIONFILE, "rt").read(), re.M)
+if getversion:
+    new_version = getversion.group(1)
+else:
+    raise RuntimeError("Unable to find version string in %s." % (VERSIONFILE,))
+
+# Setup file --------
 with open("README.md", "r") as fh:
     long_description = fh.read()
 setuptools.setup(
@@ -9,11 +17,9 @@ setuptools.setup(
      python_requires='>=3',
      name='imagesc',
      version=new_version,
-#     version=versioneer.get_version(),    # VERSION CONTROL
-#     cmdclass=versioneer.get_cmdclass(),  # VERSION CONTROL
      author="Erdogan Taskesen",
      author_email="erdogant@gmail.com",
-     description="imagesc is an python package to create heatmaps using multiple methods.",
+     description="imagesc is an Python package to create heatmaps in a easy way.",
      long_description=long_description,
      long_description_content_type="text/markdown",
      url="https://github.com/erdogant/imagesc",

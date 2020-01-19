@@ -1,4 +1,4 @@
-""" This python package creates a HEATMAP using the input dataset. Varous different manners are implemented to create heatmaps.
+""" imagesc is an Python package to create heatmaps in a easy way. Various different manners are implemented to create heatmaps.
 
    import imagesc as imagesc
 
@@ -16,7 +16,7 @@
    data:           Numpy array with rows and columns
 
    row_labels:     A list or array of length N with the labels for the rows.
-   
+
    col_labels:     A list or array of length M with the labels for the columns.
 
 
@@ -29,7 +29,7 @@
                    False: No (default)
 
    label_orientation: String: Plot labels above or below plot
-                   'above' 
+                   'above'
                    'below' (default)
 
    xtickRot:       Integer [0-360]:  Orientation of the labels
@@ -40,6 +40,15 @@
 
    dpi:            Integer: Resolution of the figure
                    100 (default)
+
+   xlabel:         String: The x-label
+                   None: (default)
+
+   ylabel:         String: The y-label
+                   None: (default)
+
+   title:          String: The title
+                   None: (default)
 
    figsize:        tuple: (width, height)
                    (10,10): (default)
@@ -53,7 +62,7 @@
                    False: No (default)
 
    annot:          Boolean [True,False]: Show per cell the value (does not work with clustering)
-                   True: 
+                   True:
                    False: (default)
 
    grid:           Boolean [True,False]: Show grid
@@ -93,7 +102,7 @@
                    'bwr'        Blue-white-red (default)
                    'RdBu'       Red-white-Blue
                    'binary' or 'binary_r'
-                   'seismic'    Blue-white-red 
+                   'seismic'    Blue-white-red
                    'rainbow'
                    'Blues'      white-to-blue
                    'Reds'
@@ -126,7 +135,7 @@
 
  EXAMPLE
  -------
- 
+
    import pandas as pd
    import numpy as np
    import imagesc as imagesc
@@ -135,14 +144,15 @@
    fig = imagesc.plot(df.values)
 
 """
-#--------------------------------------------------------------------------
+# --------------------------------------------------------------------------
 # Name        : imagesc.py
 # Author      : E.Taskesen
 # Mail        : erdogant@gmail.com
 # Date        : Jan. 2020
-#--------------------------------------------------------------------------
+# Licence     : MIT
+# --------------------------------------------------------------------------
 
-#%% Libraries
+# %% Libraries
 import matplotlib
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -150,14 +160,12 @@ import numpy as np
 
 # %% Adjust figure size based on input
 def _set_figsize(data_shape, figsize):
-    data_ratio=np.minimum(5/(data_shape[0]/data_shape[1]),50)
-    out=tuple(np.ceil(np.interp(data_shape-np.min(data_shape), [np.min(figsize),data_ratio],[np.max(figsize),data_ratio])))
-    return(out[0],out[1])
-    
-#%% General plot
+    data_ratio = np.minimum(5/(data_shape[0]/data_shape[1]), 50)
+    out = tuple(np.ceil(np.interp(data_shape-np.min(data_shape), [np.min(figsize), data_ratio], [np.max(figsize), data_ratio])))
+    return(out[0], out[1])
+
 def plot(data, row_labels=None, col_labels=None, **args):
     """Heatmap plot.
-
 
     Parameters
     ----------
@@ -174,15 +182,15 @@ def plot(data, row_labels=None, col_labels=None, **args):
     -------
     fig.
 
-    
+
     """
     assert not isinstance(data, pd.DataFrame), print('[IMAGESC] data input must be numpy array')
     # Set defaults
     args, args_im = _defaults(args)
     # Set figsize based on data shape
-    args_im['figsize']=_set_figsize(data.shape, args_im['figsize'])
+    args_im['figsize'] = _set_figsize(data.shape, args_im['figsize'])
     # Linewidth if required
-    args['linewidth']=_check_input(data, args['linewidth'], args_im)
+    args['linewidth'] = _check_input(data, args['linewidth'], args_im)
     # Normalize
     data = _normalize(data, args_im)
     # Make plot
@@ -192,17 +200,18 @@ def plot(data, row_labels=None, col_labels=None, **args):
     # _  = _annotate_heatmap(im, valfmt="{x:.1f} t")
     ax.set_xlabel(args_im['xlabel'])
     ax.set_ylabel(args_im['ylabel'])
+    if args_im['title'] is not None:
+        ax.set_title(args_im['title'])
 
     fig.tight_layout()
     plt.show()
-    
+
     # return
     return(fig)
 
 # %% Seaborn
 def seaborn(data, row_labels=None, col_labels=None, **args):
     """Heatmap based on seaborn.
-    
 
     Parameters
     ----------
@@ -224,15 +233,17 @@ def seaborn(data, row_labels=None, col_labels=None, **args):
 
     """
     assert not isinstance(data, pd.DataFrame), print('[IMAGESC] data input must be numpy array')
-    # Load libraries
-    import seaborn as sns
+    try:
+        import seaborn as sns
+    except:
+        print('[IMAGESC] Error: seaborn is missing! Try to: pip install seaborn')
+
     # Set defaults
     args, args_im = _defaults(args)
     # Linewidth if required
-    args['linewidth']=_check_input(data, args['linewidth'], args_im)
+    args['linewidth'] = _check_input(data, args['linewidth'], args_im)
     # Normalize
     data = _normalize(data, args_im)
-
 
     # Cleaning args
     try:
@@ -241,7 +252,7 @@ def seaborn(data, row_labels=None, col_labels=None, **args):
         args.pop('linkage')
     except:
         pass
-    
+
     # Set row and col labels
     row_labels, col_labels = set_labels(data.shape, row_labels, col_labels)
     # Make dataframe
@@ -251,17 +262,20 @@ def seaborn(data, row_labels=None, col_labels=None, **args):
     sns.set_style({"savefig.dpi": args_im['dpi']})
     # Set figsize based on data shape
     # args_im['figsize']=_set_figsize(data.shape, args_im['figsize'])
-    [fig,ax]=plt.subplots(figsize=args_im['figsize']) 
+    [fig, ax] = plt.subplots(figsize=args_im['figsize'])
     # Make heatmap
     ax = sns.heatmap(df, **args)
     # Set labels
     ax.set_xlabel(args_im['xlabel'])
     ax.set_ylabel(args_im['ylabel'])
+    if args_im['title'] is not None:
+        ax.set_title(args_im['title'])
     # Rotate labels
     # ax.set_xticklabels(col_labels, rotation=args_im['xtickRot'], ha='center', minor=False)
     # ax.set_yticklabels(row_labels, rotation=args_im['ytickRot'], ha='right', minor=False)
     # set the x-axis labels on the top
-    if args_im['label_orientation']=='above': ax.xaxis.tick_top()
+    if args_im['label_orientation'] == 'above':
+        ax.xaxis.tick_top()
     fig = ax.get_figure()
     # Plot
     plt.show()
@@ -289,14 +303,18 @@ def cluster(data, row_labels=None, col_labels=None, **args):
     -------
     fig.
 
-    
+
     """
     assert not isinstance(data, pd.DataFrame), print('[IMAGESC] data input must be numpy array')
-    import seaborn as sns
+    try:
+        import seaborn as sns
+    except:
+        print('[IMAGESC] Error: seaborn is missing! Try to: pip install seaborn')
+
     # Set defaults
     args, args_im = _defaults(args)
     # Linewidth if required
-    args['linewidth']=_check_input(data, args['linewidth'], args_im)
+    args['linewidth'] = _check_input(data, args['linewidth'], args_im)
     # Normalize
     data = _normalize(data, args_im)
 
@@ -317,7 +335,6 @@ def cluster(data, row_labels=None, col_labels=None, **args):
     # Set labels
     # ax.set_xlabel(args_im['xlabel'])
     # ax.set_ylabel(args_im['ylabel'])
-    
     # g.set_xticklabels(col_labels, rotation=args_im['xtickRot'], ha='center', minor=False)
     # g.set_yticklabels(row_labels, rotation=args_im['ytickRot'], ha='right', minor=False)
     # plt.rc('xtick', labelsize=14)    # fontsize of the tick labels
@@ -348,8 +365,8 @@ def clean(data, row_labels=None, col_labels=None, **args):
     Returns
     -------
     fig.
-    
-    
+
+
     """
     assert not isinstance(data, pd.DataFrame), print('[IMAGESC] data input must be numpy array')
     # Set defaults
@@ -360,7 +377,7 @@ def clean(data, row_labels=None, col_labels=None, **args):
     data = _normalize(data, args_im)
     # Plot
     # Set figsize based on data shape
-    args_im['figsize']=_set_figsize(data.shape, args_im['figsize'])
+    args_im['figsize'] = _set_figsize(data.shape, args_im['figsize'])
     fig, ax = plt.subplots(figsize=args_im['figsize'])
     # Make the plot
     ax.pcolorfast(np.flipud(data), cmap=args['cmap'], vmin=args['vmin'], vmax=args['vmax'], alpha=1)
@@ -387,7 +404,6 @@ def clean(data, row_labels=None, col_labels=None, **args):
 def fast(data, row_labels=None, col_labels=None, **args):
     """Fast manner to create a Heatmap.
 
-
     Parameters
     ----------
     data : numpy array
@@ -404,14 +420,14 @@ def fast(data, row_labels=None, col_labels=None, **args):
     Returns
     -------
     fig.
-    
-    
+
+
     """
     assert not isinstance(data, pd.DataFrame), print('[IMAGESC] data input must be numpy array')
     # Set defaults
     args, args_im = _defaults(args)
     # Linewidth if required
-    args['linewidth']=_check_input(data, args['linewidth'], args_im)
+    args['linewidth'] = _check_input(data, args['linewidth'], args_im)
     # Normalize
     data = _normalize(data, args_im)
     # Plot
@@ -428,13 +444,13 @@ def fast(data, row_labels=None, col_labels=None, **args):
         ax.figure.colorbar(im, ax=ax)
         # cbar.ax.set_ylabel(cbarlabel='', rotation=-90, va="bottom")
     # Show all ticks and label with the respective list entries.
-    if not col_labels is None:
+    if col_labels is not None:
         ax.set_xticks(np.arange(data.shape[1]))
         ax.set_xticklabels(col_labels)
         # Let the horizontal axes labeling appear on top.
-        if args_im['label_orientation']=='above':
+        if args_im['label_orientation'] == 'above':
             ax.tick_params(top=True, bottom=True, labeltop=True, labelbottom=False)
-        if args_im['label_orientation']=='below':
+        if args_im['label_orientation'] == 'below':
             ax.tick_params(top=True, bottom=True, labeltop=False, labelbottom=True)
         # Rotate the tick labels and set their alignment.
         plt.setp(ax.get_xticklabels(), rotation=args_im['xtickRot'], ha="center", rotation_mode="anchor")
@@ -443,11 +459,10 @@ def fast(data, row_labels=None, col_labels=None, **args):
     # ax.set_xticklabels(col_labels, rotation=args_im['xtickRot'], ha='center', minor=False)
     # ax.set_yticklabels(row_labels, rotation=args_im['ytickRot'], ha='right', minor=False)
 
-    if not row_labels is None:
+    if row_labels is not None:
         ax.set_yticks(np.arange(data.shape[0]))
         ax.set_yticklabels(row_labels)
         plt.setp(ax.get_yticklabels(), rotation=args_im['ytickRot'], ha="right", rotation_mode="anchor")
-
 
     # Turn spines off and create white grid.
     # for edge, spine in ax.spines.items():
@@ -458,13 +473,15 @@ def fast(data, row_labels=None, col_labels=None, **args):
         ax.set_yticks(np.arange(data.shape[0]+1)-.5, minor=True)
     if args['linewidth']>0 and args_im['grid']:
         ax.grid(which="minor", color=args['linecolor'], linestyle='-', linewidth=args['linewidth'])
-    if args_im['axis']==False:
+    if not args_im['axis']:
         plt.axis('off')
     ax.grid(False)
-    
+
     # Set labels
     ax.set_xlabel(args_im['xlabel'])
     ax.set_ylabel(args_im['ylabel'])
+    if args_im['title'] is not None:
+        ax.set_title(args_im['title'])
 
     # Return
     return(fig)
@@ -612,28 +629,21 @@ def _check_input(data, linewidth, args_im):
 # %% Check input
 def _normalize(data, args_im):
     if args_im['normalize']:
-        if args_im['verbose'] >=3: print('[IMAGESC] Normalzing data..' )
+        if args_im['verbose'] >=3: print('[IMAGESC] Normalzing data..')
         data = (data - data.mean()) / (data.max() - data.min())
     return(data)
 
 # %%
 def set_labels(data_shape, row_labels, col_labels):
     if row_labels is None:
-        row_labels = np.arange(0,data_shape[0])
+        row_labels = np.arange(0, data_shape[0])
     if col_labels is None:
-        col_labels = np.arange(0,data_shape[1])
+        col_labels = np.arange(0, data_shape[1])
     return(row_labels, col_labels)
-
-#%%
-# def _extents(f):
-  # delta = f[1] - f[0]
-  # return [f[0] - delta/2, f[-1] + delta/2]
-
 
 # %%
 def _annotate_heatmap(im, data=None, valfmt="{x:.2f}", textcolors=["black", "white"], threshold=None, **textkw):
-    """
-    A function to annotate a heatmap.
+    """Function to annotate a heatmap.
 
     Parameters
     ----------
