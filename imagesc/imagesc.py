@@ -164,6 +164,7 @@ def _set_figsize(data_shape, figsize):
     out = tuple(np.ceil(np.interp(data_shape-np.min(data_shape), [np.min(figsize), data_ratio], [np.max(figsize), data_ratio])))
     return(out[0], out[1])
 
+# %%
 def plot(data, row_labels=None, col_labels=None, **args):
     """Heatmap plot.
 
@@ -331,7 +332,7 @@ def cluster(data, row_labels=None, col_labels=None, **args):
     g = sns.clustermap(df, method=args['linkage'], metric=args['distance'], col_cluster=True, row_cluster=True, linecolor=args['linecolor'], linewidths=args['linewidth'], cmap=args['cmap'], standard_scale=args['standard_scale'], vmin=args['vmin'], vmax=args['vmax'], figsize=args_im['figsize'])
     # Rotate labels
     plt.setp(g.ax_heatmap.get_xticklabels(), rotation=args_im['xtickRot'], ha='center')
-    plt.setp(g.ax_heatmap.get_yticklabels(), rotation=args_im['ytickRot'], ha='center')
+    plt.setp(g.ax_heatmap.get_yticklabels(), rotation=args_im['ytickRot'], ha='left')
     # Set labels
     # ax.set_xlabel(args_im['xlabel'])
     # ax.set_ylabel(args_im['ylabel'])
@@ -601,8 +602,8 @@ def _defaults(args):
         except:
             pass
                 
-    # Set defaults for args
-    args.setdefault('standard_scale', args.get('standard_scale',False))
+    # Set defaults for args that are feeded into the various baseline functions (seaborn, clustermap, imshow)
+    args.setdefault('standard_scale', args.get('standard_scale',None))
     args.setdefault('cbar',True)
     args.setdefault('linewidth',0.1)
     args.setdefault('annot',False)
