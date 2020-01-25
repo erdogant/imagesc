@@ -56,7 +56,7 @@ python setup.py install
 import imagesc as imagesc
 ```
 
-## seaborn
+### seaborn
 * Underlying implemented is based on **seaborn**
 * Large number of configurations
 * Slow when using large datasets
@@ -78,7 +78,7 @@ D = imagesc.seaborn(df.values, df.index.values, df.columns.values, annot=True, a
 </p>
 
 
-## cluster
+### cluster
 * Underlying implemented is based on **clustermap** 
 * When you desire to cluster your heatmap
 * Default distance setting: metric="euclidean", linkage="ward" (can be changed)
@@ -103,7 +103,7 @@ imagesc.savefig(fig_C1, './docs/figs/cluster4.png')
 </p>
 
 
-## fast
+### fast
 * Underlying implemented is based on **pcolorfast** 
 * Fast
 * Not so much tweakable
@@ -129,7 +129,7 @@ imagesc.savefig(fig_C1, './docs/figs/fast1.png')
   F6<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/fast6.png" width="300" />
 </p>
 
-## clean
+### clean
 * Underlying implemented is based on **pcolorfast** 
 * Fast
 * No Grid
@@ -148,7 +148,7 @@ imagesc.savefig(fig_C1, './docs/figs/clean1.png')
   F2<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/clean2.png" width="300" />
 </p>
 
-## plot
+### plot
 * Underlying implemented is based on **imshow** 
 * implementation will behave more-or-less as the one of matlab
 * Medium speed
@@ -184,7 +184,7 @@ imagesc.savefig(fig, './docs/figs/plot10.png')imagesc.savefig(fig_C1, './docs/fi
 </p>
 
 
-## Speed:
+### Speed:
 ```python
 import matplotlib.image as mpimg
 img=mpimg.imread('./docs/figs/lenna.png')
@@ -209,7 +209,7 @@ fig = imagesc.plot(img, linewidth=0, cbar=False)
 
 
 
-## Citation
+### Citation
 Please cite imagesc in your publications if this is useful for your research. Here is an example BibTeX entry:
 ```BibTeX
 @misc{erdogant2019imagesc,
@@ -220,7 +220,7 @@ Please cite imagesc in your publications if this is useful for your research. He
 }
 ```
 
-## References
+### References
 * seaborn
 https://seaborn.pydata.org/generated/seaborn.heatmap.html
 * clustermap
@@ -235,11 +235,14 @@ https://matplotlib.org/3.1.1/gallery/images_contours_and_fields/image_annotated_
 https://matplotlib.org/examples/color/colormaps_reference.html
 
 
-## Maintainers
+### Maintainers
 * Erdogan Taskesen, github: [erdogant](https://github.com/erdogant)
 
-## Contribute
+### Contribute
 * Contributions are welcome.
 
-## Licence
+### Licence
 See [LICENSE](LICENSE) for details.
+
+### Donation
+* This work is created and maintained in my free time. If this package is usefull to you and if want to see more like this, you can show your <a href="https://erdogant.github.io/donate/?currency=USD&amount=5">gratitude</a> :) Thanks!
