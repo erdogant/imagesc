@@ -5,10 +5,10 @@ Created on Tue Jan 14 08:37:59 2020
 @author: Erdogan
 """
 # %reset -f
-import etutils as et
+# import etutils as et
 import pandas as pd
 import numpy as np
-import imagesc as imagesc
+import imagesc.imagesc as imagesc
 
 # %%
 # df = pd.DataFrame(np.random.rand(10,15))
@@ -16,9 +16,11 @@ df = pd.DataFrame(np.random.randint(0,100,size=(6,20)))
 # df = pd.DataFrame(np.random.randint(0,100,size=(5,25)))
 # df = pd.DataFrame(np.random.randint(0,100,size=(10,100)))
 
+fig = imagesc.seaborn(df.values, df.index.values, df.columns.values, annot=True, annot_kws={"size": 12})
+
 # %% Seaborn
 
-et.tic()
+# et.tic()
 import imagesc as imagesc
 fig = imagesc.seaborn(df.values, df.index.values, df.columns.values, title='test', xlabel='xlabel', ylabel='ylabel')
 # imagesc.savefig(fig, './docs/figs/seaborn1.png')
@@ -30,12 +32,12 @@ fig = imagesc.seaborn(df.values, df.index.values, df.columns.values, annot=True,
 # imagesc.savefig(fig, './docs/figs/seaborn4.png')
 fig = imagesc.seaborn(df.values, df.index.values, df.columns.values, annot=True, annot_kws={"size": 12}, cmap='rainbow', linecolor='#ffffff', linewidth=0)
 # imagesc.savefig(fig, './docs/figs/seaborn5.png')
-print('[%.3f] Seaborn' %(et.toc()))
+# print('[%.3f] Seaborn' %(et.toc()))
 
 # fig = imagesc.seaborn(df.values, df.index.values, df.columns.values, annot=True, annot_kws={"size": 12}, cmap='rainbow', linecolor='#ffffff', linewidth=0, ytickRot=45, xtickRot=45)
 
 # %% Cluster
-et.tic()
+# et.tic()
 import imagesc as imagesc
 fig = imagesc.cluster(df.values, df.index.values, df.columns.values, title='test', xlabel='xlabel', ylabel='ylabel')
 # imagesc.savefig(fig, './docs/figs/cluster1.png')
@@ -45,7 +47,7 @@ fig = imagesc.cluster(df.values, df.index.values, df.columns.values, cmap='rainb
 # imagesc.savefig(fig, './docs/figs/cluster3.png')
 fig = imagesc.cluster(df.values, df.index.values, df.columns.values, cmap='rainbow', linecolor='#ffffff', linewidth=0)
 # imagesc.savefig(fig, './docs/figs/cluster4.png')
-print('[%.3f] Cluster' %(et.toc()))
+# print('[%.3f] Cluster' %(et.toc()))
 
 # fig = imagesc.cluster(df.values, df.index.values, df.columns.values, cmap='rainbow', linecolor='#ffffff', linewidth=0, ytickRot=45, xtickRot=45)
 

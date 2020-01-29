@@ -110,30 +110,22 @@
                    'Paired'     Discrete colors
                    'Set1'       Discrete colors
 
- OUTPUT
- ------
-	dictionary
 
 
- DESCRIPTION
+ References
  -----------
     * seaborn
-    https://seaborn.pydata.org/generated/seaborn.heatmap.html
-    
+        https://seaborn.pydata.org/generated/seaborn.heatmap.html
     * clustermap
-    https://seaborn.pydata.org/generated/seaborn.clustermap.html
-    
+        https://seaborn.pydata.org/generated/seaborn.clustermap.html
     * fast and clean
-    https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.axes.Axes.pcolor.html
-
+        https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.axes.Axes.pcolor.html
     * Other
-    https://matplotlib.org/3.1.1/gallery/images_contours_and_fields/image_annotated_heatmap.html
-
+        https://matplotlib.org/3.1.1/gallery/images_contours_and_fields/image_annotated_heatmap.html
     * Colormap
-    https://matplotlib.org/examples/color/colormaps_reference.html
+        https://matplotlib.org/examples/color/colormaps_reference.html
 
-
- EXAMPLE
+ Example
  -------
 
    import pandas as pd
@@ -148,7 +140,6 @@
 # Name        : imagesc.py
 # Author      : E.Taskesen
 # Mail        : erdogant@gmail.com
-# Date        : Jan. 2020
 # Licence     : MIT
 # --------------------------------------------------------------------------
 
@@ -157,6 +148,7 @@ import matplotlib
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
+from packaging import version
 
 # %% Adjust figure size based on input
 def _set_figsize(data_shape, figsize):
@@ -260,7 +252,7 @@ def seaborn(data, row_labels=None, col_labels=None, **args):
     df = pd.DataFrame(data=data, index=row_labels, columns=col_labels)
     sns.set(color_codes=True)
     sns.set(font_scale=1.2)
-    sns.set_style({"savefig.dpi": args_im['dpi']})
+    # sns.set_style({"savefig.dpi": args_im['dpi']})
     # Set figsize based on data shape
     # args_im['figsize']=_set_figsize(data.shape, args_im['figsize'])
     [fig, ax] = plt.subplots(figsize=args_im['figsize'])
@@ -271,16 +263,25 @@ def seaborn(data, row_labels=None, col_labels=None, **args):
     ax.set_ylabel(args_im['ylabel'])
     if args_im['title'] is not None:
         ax.set_title(args_im['title'])
+    if args_im['label_orientation'] == 'above':
+        ax.xaxis.tick_top()
+
     # Rotate labels
     # ax.set_xticklabels(col_labels, rotation=args_im['xtickRot'], ha='center', minor=False)
     # ax.set_yticklabels(row_labels, rotation=args_im['ytickRot'], ha='right', minor=False)
     # set the x-axis labels on the top
-    if args_im['label_orientation'] == 'above':
-        ax.xaxis.tick_top()
-    fig = ax.get_figure()
+    
+    # # fix for mpl bug that cuts off top/bottom of seaborn viz
+    # b, t = plt.ylim() # discover the values for bottom and top
+    # b += 0.5 # Add 0.5 to the bottom
+    # t -= 0.5 # Subtract 0.5 from the top
+    # plt.ylim(b, t) # update the ylim(bottom, top) values
+    
     # Plot
+    # ax.tight_layout()
     plt.show()
     # Return
+    fig = ax.get_figure()
     return(fig)
 
 # %% Cluster
@@ -592,6 +593,10 @@ def _heatmap(data, row_labels, col_labels, args_im, **args):
 
 #%% Set defaults
 def _defaults(args):
+    # Version check
+    if not version.parse(matplotlib.__version__) > version.parse("3.1.1"):
+        print('[IMAGESC] Warning: Matplotlib version is advised to be to be > v3.1.1. Otherwise heatmaps can have cut-off tops and bottoms.\nTry to: pip install -U matplotlib')
+
     # Extract the below for internal stuff
     getdefaults={'xlabel':None,'ylabel':None,'title':None,'axis':True,'grid':True,'normalize':False,'label_orientation':'below','verbose':3,'xtickRot':90,'ytickRot':0,'dpi':100,'figsize':(15,5)}
     args_im=dict()
