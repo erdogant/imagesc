@@ -110,31 +110,6 @@
                    'Paired'     Discrete colors
                    'Set1'       Discrete colors
 
-
-
- References
- -----------
-    * seaborn
-        https://seaborn.pydata.org/generated/seaborn.heatmap.html
-    * clustermap
-        https://seaborn.pydata.org/generated/seaborn.clustermap.html
-    * fast and clean
-        https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.axes.Axes.pcolor.html
-    * Other
-        https://matplotlib.org/3.1.1/gallery/images_contours_and_fields/image_annotated_heatmap.html
-    * Colormap
-        https://matplotlib.org/examples/color/colormaps_reference.html
-
- Example
- -------
-
-   import pandas as pd
-   import numpy as np
-   import imagesc as imagesc
-
-   df = pd.DataFrame(np.random.rand(3,4), columns=['aap', 'boom', 'mies','banaan'] , index=['aap1', 'boom2', 'mies3'])
-   fig = imagesc.plot(df.values)
-
 """
 # --------------------------------------------------------------------------
 # Name        : imagesc.py
@@ -164,11 +139,11 @@ def plot(data, row_labels=None, col_labels=None, **args):
     ----------
     data : numpy array
         data array.
-    row_labels
+    row_labels : List
         A list or array of length N with the labels for the rows.
-    col_labels
+    col_labels : List
         A list or array of length M with the labels for the columns.
-    **args : TYPE
+    **args
         Various functionalities that can are directly used as input for seaborn.
 
     Returns
@@ -267,8 +242,8 @@ def seaborn(data, row_labels=None, col_labels=None, **args):
         ax.xaxis.tick_top()
 
     # Rotate labels
-    # ax.set_xticklabels(col_labels, rotation=args_im['xtickRot'], ha='center', minor=False)
-    # ax.set_yticklabels(row_labels, rotation=args_im['ytickRot'], ha='right', minor=False)
+    ax.set_xticklabels(col_labels, rotation=args_im['xtickRot'], ha='center', minor=False)
+    ax.set_yticklabels(row_labels, rotation=args_im['ytickRot'], ha='right', minor=False)
     # set the x-axis labels on the top
     
     # # fix for mpl bug that cuts off top/bottom of seaborn viz

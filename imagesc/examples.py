@@ -8,7 +8,7 @@ Created on Tue Jan 14 08:37:59 2020
 # import etutils as et
 import pandas as pd
 import numpy as np
-import imagesc.imagesc as imagesc
+import imagesc as imagesc
 
 # %%
 # df = pd.DataFrame(np.random.rand(10,15))
