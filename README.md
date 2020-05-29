@@ -236,14 +236,8 @@ https://matplotlib.org/3.1.1/gallery/images_contours_and_fields/image_annotated_
 https://matplotlib.org/examples/color/colormaps_reference.html
 
 
-### Maintainers
+### Maintainer
 * Erdogan Taskesen, github: [erdogant](https://github.com/erdogant)
-
-### Contribute
 * Contributions are welcome.
+* If you wish to buy me a <a href="https://erdogant.github.io/donate/?currency=USD&amount=5">Coffee</a> for this work, it is very appreciated :)
 
-### Licence
-See [LICENSE](LICENSE) for details.
-
-### Donation
-* This work is created and maintained in my free time. If you wish to buy me a <a href="https://erdogant.github.io/donate/?currency=USD&amount=5">Coffee</a> for this work, it is very appreciated.
