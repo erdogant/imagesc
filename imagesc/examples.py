@@ -20,7 +20,6 @@ fig = imagesc.seaborn(df.values, df.index.values, df.columns.values, annot=True,
 
 # %% Seaborn
 
-# et.tic()
 import imagesc as imagesc
 fig = imagesc.seaborn(df.values, df.index.values, df.columns.values, title='test', xlabel='xlabel', ylabel='ylabel')
 # imagesc.savefig(fig, './docs/figs/seaborn1.png')
@@ -37,7 +36,6 @@ fig = imagesc.seaborn(df.values, df.index.values, df.columns.values, annot=True,
 # fig = imagesc.seaborn(df.values, df.index.values, df.columns.values, annot=True, annot_kws={"size": 12}, cmap='rainbow', linecolor='#ffffff', linewidth=0, ytickRot=45, xtickRot=45)
 
 # %% Cluster
-# et.tic()
 import imagesc as imagesc
 fig = imagesc.cluster(df.values, df.index.values, df.columns.values, title='test', xlabel='xlabel', ylabel='ylabel')
 # imagesc.savefig(fig, './docs/figs/cluster1.png')
@@ -52,7 +50,6 @@ fig = imagesc.cluster(df.values, df.index.values, df.columns.values, cmap='rainb
 # fig = imagesc.cluster(df.values, df.index.values, df.columns.values, cmap='rainbow', linecolor='#ffffff', linewidth=0, ytickRot=45, xtickRot=45)
 
 # %% Fast
-et.tic()
 import imagesc as imagesc
 fig = imagesc.fast(df.values, df.index.values, df.columns.values, title='test', xlabel='xlabel', ylabel='ylabel')
 # imagesc.savefig(fig, './docs/figs/fast1.png')
@@ -66,21 +63,17 @@ fig = imagesc.fast(df.values, df.index.values, df.columns.values, cmap='rainbow'
 # imagesc.savefig(fig, './docs/figs/fast5.png')
 fig = imagesc.fast(df.values, df.index.values, df.columns.values, cmap='rainbow', linewidth=0.5, grid=True)
 # imagesc.savefig(fig, './docs/figs/fast6.png')
-print('[%.3f] Fast' %(et.toc()))
 
 # fig = imagesc.fast(df.values, df.index.values, df.columns.values, cmap='rainbow', linewidth=0.5, grid=True, ytickRot=45, xtickRot=45)
 
 # %% Clean: Best for plotting photos
-et.tic()
 import imagesc as imagesc
 fig = imagesc.clean(df.values)
 # imagesc.savefig(fig, './docs/figs/clean1.png')
 fig = imagesc.clean(df.values, cmap='rainbow')
 # imagesc.savefig(fig, './docs/figs/clean2.png')
-print('[%.3f] Clean and fast' %(et.toc()))
 
 # %% Matlab-like plots
-et.tic()
 
 # df = pd.DataFrame(np.random.randint(0,100,size=(50,50)))
 import imagesc as imagesc
@@ -106,25 +99,24 @@ fig = imagesc.plot(df.values, df.index.values, df.columns.values, grid=True, cba
 fig = imagesc.plot(df.values, df.index.values, df.columns.values, grid=True, cbar=False, linewidth=0.8, linecolor='#ffffff', cmap='rainbow')
 # imagesc.savefig(fig, './docs/figs/plot10.png')
 
-print('[%.3f] Default' %(et.toc()))
 
 # %% Photo image
 import matplotlib.image as mpimg
 img=mpimg.imread('./docs/figs/lenna.png')
 
-et.tic()
+# et.tic()
 fig = imagesc.fast(img, cbar=False, axis=False)
 imagesc.savefig(fig, './docs/figs/fast_lenna.png')
-print('[%.3f] fast' %(et.toc()))
+# print('[%.3f] fast' %(et.toc()))
 
-et.tic()
+# et.tic()
 fig = imagesc.clean(img)
-print('[%.3f] clean' %(et.toc()))
+# print('[%.3f] clean' %(et.toc()))
 
-et.tic()
+# et.tic()
 fig = imagesc.plot(img, linewidth=0, cbar=False, axis=False)
 imagesc.savefig(fig, './docs/figs/plot_lenna1.png')
-print('[%.3f] plot' %(et.toc()))
+# print('[%.3f] plot' %(et.toc()))
 
 #%% Timings with arrays
 from tqdm import tqdm
