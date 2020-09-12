@@ -129,23 +129,166 @@ from imagesc.utils.adjmat_vec import adjmat2vec
 curpath = os.path.dirname(os.path.abspath(__file__))
 from shutil import copyfile
 import webbrowser
+import tempfile
+
+
+# %% Scaling
+def _scale(X, verbose=3):
+    """Scale data.
+
+    Description
+    -----------
+    Scaling in range [0-100] by X*(100/max(X))
+
+    Parameters
+    ----------
+    X : array-like
+        Input image data.
+    verbose : int (default : 3)
+        Print to screen. 0: None, 1: Error, 2: Warning, 3: Info, 4: Debug, 5: Trace.
+
+    Returns
+    -------
+    df : array-like
+        Scaled image.
+
+    """
+    if verbose>=3: print('[imagesc] >Scaling image between [0-100]')
+    try:
+        # Normalizing between 0-100
+        # X = X - X.min()
+        X = X / X.max().max()
+        X = X * 100
+        X = np.round(X)
+    except:
+        if verbose>=2: print('[imagesc] >Warning: Scaling not possible.')
+
+    return X
+
 
 # %%
-def d3(df, path=None, title='d3 Heatmap!', description='Heatmap description', width=500, height=500, fontsize=10, cmap='interpolateInferno', showfig=True, verbose=3):
-    # https://github.com/d3/d3-scale-chromatic
-    # scaleOrdinal
-    # scaleSequential
-    # interpolateSinebow
-    # interpolateGreens
-    # schemePastel1
-    # schemeSet1
-    # schemeTableau10
+def d3(df, path=None, title='d3 Heatmap!', description='Heatmap description', width=500, height=500, fontsize=10, cmap='interpolateInferno', scale=False, vmin=None, vmax=None, showfig=True, stroke='red', verbose=3):
+    """Heatmap in d3 javascript.
 
+    Parameters
+    ----------
+    df : pd.DataFrame()
+        Input data. The index and column names are used for the row/column naming.
+    path : String, (Default: user temp directory)
+        Directory path to save the output, such as 'c://temp/index.html'
+    title : String, (default: 'd3 Heatmap!')
+        Title text.
+    description : String, (default: 'Heatmap description')
+        Description text of the heatmap.
+    width : int, (default: 500).
+        Width of the window.
+    height : int, (default: 500).
+        height of the window.
+    fontsize : int, (default: 10).
+        Font size for the X and Y labels.
+    scale : Bool, (default: True).
+        Scale the values between [0-100].
+    vmin : Bool, (default: 0).
+        Range of colors starting with minimum value.
+            * 1 : cells with value <1 are coloured white.
+            * None : cells are colored based on the minimum value in the input data.
+    vmax : Bool, (default: 100).
+        Range of colors starting with maximum value.
+            * 100 : cells above value >100 are capped.
+            * None : cells are colored based on the maximum value in the input data.
+    stroke : String, (default: 'red').
+        Color of the recangle when hovering over a cell.
+            * 'red'
+            * 'black'
+    cmap : String, (default: 'interpolateInferno').
+        The colormap scheme. This can be found at: https://github.com/d3/d3-scale-chromatic.
+        Categorical:
+            * 'schemeCategory10'
+            * 'schemeAccent'
+            * 'schemeDark2'
+            * 'schemePaired'
+            * 'schemePastel1'
+            * 'schemePastel2'
+            * 'schemeSet1'
+            * 'schemeSet2'
+            * 'schemeSet3'
+            * 'schemeTableau10'
+        Diverging:
+            * 'interpolateInferno'
+            * 'interpolatePRGn'
+            * 'interpolatePiYG'
+            * 'interpolatePuOr'
+            * 'interpolateRdBu'
+            * 'interpolateRdGy'
+            * 'interpolateRdYlBu'
+            * 'interpolateRdYlGn'
+            * 'interpolateSpectral'
+        Single color:
+            * 'interpolateBlues'
+            * 'interpolateGreens'
+            * 'interpolateGreys'
+            * 'interpolateOranges'
+            * 'interpolatePurples'
+            * 'interpolateReds'
+        Sequential:
+            * 'interpolateTurbo'
+            * 'interpolateViridis'
+            * 'interpolateInferno'
+            * 'interpolateMagma'
+            * 'interpolatePlasma'
+            * 'interpolateCividis'
+            * 'interpolateWarm'
+            * 'interpolateCool'
+            * 'interpolateCubehelixDefault'
+            * 'interpolateBuGn'
+            * 'interpolateBuPu'
+            * 'interpolateGnBu'
+            * 'interpolateOrRd'
+            * 'interpolatePuBuGn'
+            * 'interpolatePuBu'
+            * 'interpolatePuRd'
+            * 'interpolateRdPu'
+            * 'interpolateYlGnBu'
+            * 'interpolateYlGn'
+            * 'interpolateYlOrBr'
+            * 'interpolateYlOrRd'
+        Cyclic:
+            * 'interpolateRainbow'
+            * 'interpolateSinebow'
+    showfig : Bool, (default: True)
+        Open browser with heatmap.
+    verbose : int [0-5], (default: 3)
+        Verbosity to print the working-status. The higher the number, the more information.
+            * 0: None
+            * 1: Error
+            * 2: Warning
+            * 3: Info
+            * 4: Debug
+            * 5: Trace
+
+    Returns
+    -------
+    out : dict.
+        output path names.
+
+    """
     if cmap in ['schemeCategory10', 'schemeAccent', 'schemeDark2', 'schemePaired', 'schemePastel2', 'schemePastel1', 'schemeSet1', 'schemeSet2', 'schemeSet3', 'schemeTableau10']:
         cmap_type='scaleOrdinal'
         if verbose>=3: print('[imagesc] >d3 cmap type is set to %s' %(cmap_type))
     else:
         cmap_type='scaleSequential'
+
+    # Rescale data between 0-100
+    if scale:
+        df = _scale(df, verbose=verbose)
+    if (not scale) and (vmin is not None) and (vmax is not None):
+        if verbose>=3: print('[imagesc] >Data is not scaled. Tip: set vmin=None and vmax=None to range colors between min-max of your data.')
+    if vmin is None:
+        vmin = np.min(df.values)
+    if vmax is None:
+        vmax = np.max(df.values)
+    if verbose>=3: print('[imagesc] >vmin is set to: %g' %(vmin))
+    if verbose>=3: print('[imagesc] >vmax is set to: %g' %(vmax))
 
     # Get path to files
     d3_library = os.path.abspath(os.path.join(curpath, 'd3js/d3.v4.js'))
@@ -202,9 +345,13 @@ def d3(df, path=None, title='d3 Heatmap!', description='Heatmap description', wi
     d3graphscript = d3graphscript.replace('$WIDTH$', str(width))
     d3graphscript = d3graphscript.replace('$HEIGHT$', str(height))
 
+    d3graphscript = d3graphscript.replace('$VMIN$', str(vmin))
+    d3graphscript = d3graphscript.replace('$VMAX$', str(vmax))
+
     d3graphscript = d3graphscript.replace('$FONTSIZE_X$', str(fontsize_x))
     d3graphscript = d3graphscript.replace('$FONTSIZE_Y$', str(fontsize_y))
 
+    d3graphscript = d3graphscript.replace('$STROKE$', str(stroke))
     d3graphscript = d3graphscript.replace('$CMAP$', str(cmap))
     d3graphscript = d3graphscript.replace('$CMAP_TYPE$', str(cmap_type))
 
@@ -724,12 +871,12 @@ def _set_figsize(data_shape, figsize):
 def _path_check(path, verbose):
     # Check wether path
     if path is None:
-        path = os.path.join(curpath, 'index.html')
+        path = os.path.join(tempfile.gettempdir(), 'index.html')
     # Check wether dir + path
     dirpath, filename = os.path.split(path)
     # if input is single file, attach the absolute path.
     if dirpath=='':
-        path = os.path.join(curpath, filename)
+        path = os.path.join(tempfile.gettempdir(), filename)
         dirpath, filename = os.path.split(path)
     # Check before proceeding
     if not '.html' in filename:
@@ -742,6 +889,8 @@ def _path_check(path, verbose):
     path = os.path.abspath(path)
     dirpath, filename = os.path.split(path)
     return filename, dirpath, path
+
+    
 
 # %%
 def _annotate_heatmap(im, data=None, valfmt="{x:.2f}", textcolors=["black", "white"], threshold=None, **textkw):

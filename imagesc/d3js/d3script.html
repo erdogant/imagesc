@@ -74,7 +74,7 @@ var data =
   // Build color scale
   var myColor = d3.$CMAP_TYPE$()
     .interpolator(d3.$CMAP$)
-    .domain([1,100])
+    .domain([$VMIN$, $VMAX$])
 
   // create a tooltip
   var tooltip = d3.select("#d3_heatmap")
@@ -92,7 +92,7 @@ var data =
     tooltip
       .style("opacity", 0.8)
     d3.select(this)
-      .style("stroke", "black")
+      .style("stroke", "$STROKE$")
       .style("opacity", 0.8)
   }
   var mousemove = function(d) {

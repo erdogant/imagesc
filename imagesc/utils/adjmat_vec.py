@@ -73,7 +73,7 @@ def vec2adjmat(source, target, weight=None, symmetric=True):
 
 
 # %%  Convert adjacency matrix to vector
-def adjmat2vec(adjmat, min_weight=1):
+def adjmat2vec(adjmat, min_weight=0, verbose=3):
     """Convert adjacency matrix into vector with source and target.
 
     Parameters
@@ -103,9 +103,9 @@ def adjmat2vec(adjmat, min_weight=1):
     adjmat.columns = ['source', 'target', 'weight']
     # Remove self loops and no-connected edges
     Iloc1 = adjmat['source']!=adjmat['target']
-    Iloc2 = adjmat['weight']>=min_weight
+    Iloc2 = adjmat['weight']>min_weight
     Iloc = Iloc1 & Iloc2
     # Take only connected nodes
-    adjmat = adjmat.loc[Iloc,:]
+    adjmat = adjmat.loc[Iloc, :]
     adjmat.reset_index(drop=True, inplace=True)
     return(adjmat)

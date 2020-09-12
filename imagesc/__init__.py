@@ -15,7 +15,7 @@ from imagesc.utils.adjmat_vec import (
 
 __author__ = 'Erdogan Tasksen'
 __email__ = 'erdogant@gmail.com'
-__version__ = '0.1.8'
+__version__ = '0.1.9'
 
 # module level doc-string
 __doc__ = """
@@ -45,7 +45,9 @@ Examples
 >>>
 >>> status = imagesc.savefig(fig)
 >>>
-
+>>> # d3 example
+>>> out = imagesc.d3(df, cmap='interpolateGreens', fontsize=15)
+>>>
 
 References
 ----------
@@ -59,6 +61,8 @@ References
     https://matplotlib.org/3.1.1/gallery/images_contours_and_fields/image_annotated_heatmap.html
 * Colormap
     https://matplotlib.org/examples/color/colormaps_reference.html
+* d3
+    d3-graph-gallery.com
 
 
 """
