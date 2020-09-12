@@ -130,35 +130,6 @@ curpath = os.path.dirname(os.path.abspath(__file__))
 from shutil import copyfile
 import webbrowser
 
-# %% Adjust figure size based on input
-def _set_figsize(data_shape, figsize):
-    data_ratio = np.minimum(5/(data_shape[0]/data_shape[1]), 50)
-    out = tuple(np.ceil(np.interp(data_shape-np.min(data_shape), [np.min(figsize), data_ratio], [np.max(figsize), data_ratio])))
-    return(out[0], out[1])
-
-# %%
-def _path_check(path, verbose):
-    # Check wether path
-    if path is None:
-        path = os.path.join(curpath, 'index.html')
-    # Check wether dir + path
-    dirpath, filename = os.path.split(path)
-    # if input is single file, attach the absolute path.
-    if dirpath=='':
-        path = os.path.join(curpath, filename)
-        dirpath, filename = os.path.split(path)
-    # Check before proceeding
-    if not '.html' in filename:
-        raise ValueError('[imagesc] >path should contain the file extension: ".html" ')
-    # Create dir
-    if not os.path.isdir(dirpath):
-        if verbose>=2: print('[imagesc] >Warning: Creating directory [%s]' %(dirpath))
-        os.makedirs(dirpath, exist_ok=True)
-    # Final
-    path = os.path.abspath(path)
-    dirpath, filename = os.path.split(path)
-    return filename, dirpath, path
-
 # %%
 def d3(df, path=None, title='d3 Heatmap!', description='Heatmap description', width=500, height=500, fontsize=10, cmap='interpolateInferno', showfig=True, verbose=3):
     # https://github.com/d3/d3-scale-chromatic
@@ -742,6 +713,35 @@ def set_labels(data_shape, row_labels, col_labels):
     if col_labels is None:
         col_labels = np.arange(0, data_shape[1])
     return(row_labels, col_labels)
+
+# %% Adjust figure size based on input
+def _set_figsize(data_shape, figsize):
+    data_ratio = np.minimum(5/(data_shape[0]/data_shape[1]), 50)
+    out = tuple(np.ceil(np.interp(data_shape-np.min(data_shape), [np.min(figsize), data_ratio], [np.max(figsize), data_ratio])))
+    return(out[0], out[1])
+
+# %%
+def _path_check(path, verbose):
+    # Check wether path
+    if path is None:
+        path = os.path.join(curpath, 'index.html')
+    # Check wether dir + path
+    dirpath, filename = os.path.split(path)
+    # if input is single file, attach the absolute path.
+    if dirpath=='':
+        path = os.path.join(curpath, filename)
+        dirpath, filename = os.path.split(path)
+    # Check before proceeding
+    if not '.html' in filename:
+        raise ValueError('[imagesc] >path should contain the file extension: ".html" ')
+    # Create dir
+    if not os.path.isdir(dirpath):
+        if verbose>=2: print('[imagesc] >Warning: Creating directory [%s]' %(dirpath))
+        os.makedirs(dirpath, exist_ok=True)
+    # Final
+    path = os.path.abspath(path)
+    dirpath, filename = os.path.split(path)
+    return filename, dirpath, path
 
 # %%
 def _annotate_heatmap(im, data=None, valfmt="{x:.2f}", textcolors=["black", "white"], threshold=None, **textkw):
