@@ -102,9 +102,10 @@ def adjmat2vec(adjmat, min_weight=0, verbose=3):
     # Set columns
     adjmat.columns = ['source', 'target', 'weight']
     # Remove self loops and no-connected edges
-    Iloc1 = adjmat['source']!=adjmat['target']
-    Iloc2 = adjmat['weight']>min_weight
-    Iloc = Iloc1 & Iloc2
+    # Iloc1 = adjmat['source']!=adjmat['target']
+    Iloc2 = adjmat['weight']>=min_weight
+    # Iloc = Iloc1 & Iloc2
+    Iloc = Iloc2
     # Take only connected nodes
     adjmat = adjmat.loc[Iloc, :]
     adjmat.reset_index(drop=True, inplace=True)
