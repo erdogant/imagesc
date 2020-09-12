@@ -7,13 +7,7 @@
 [![Downloads](https://pepy.tech/badge/imagesc/month)](https://pepy.tech/project/imagesc/month)
 [![Downloads](https://pepy.tech/badge/imagesc)](https://pepy.tech/project/imagesc)
 
-.. image:: https://img.shields.io/pypi/pyversions/imagesc
-   :target: https://img.shields.io/pypi/pyversions/imagesc
-   :alt: PyPi package version
-
-.. image:: https://pepy.tech/badge/imagesc/month
-   :target: https://pepy.tech/project/imagesc/month
-   :alt: PyPi downloads
+[![Python]( https://img.shields.io/github/forks/erdogant/imagesc.svg)](https://github.com/erdogant/imagesc/network)
 
 .. image:: https://img.shields.io/github/forks/erdogant/imagesc.svg
    :alt: GitHub Forks
