@@ -327,7 +327,7 @@ def d3(df, path=None, title='d3 Heatmap!', description='Heatmap description', wi
         DATA_STR = DATA_STR + newline
 
     # Read the data
-    # var data = 
+    # var data =
     # 	[
     # 		{"group":"A", "variable":"v1", "value":"3"},
     # 		{"group":"A", "variable":"v2", "value":"5"},
@@ -369,6 +369,7 @@ def d3(df, path=None, title='d3 Heatmap!', description='Heatmap description', wi
     out['path'] = path
     out['csv'] = PATHNAME_TO_CSV
     return out
+
 
 # %%
 def plot(data, row_labels=None, col_labels=None, **args):
