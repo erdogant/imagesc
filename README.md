@@ -7,6 +7,31 @@
 [![Downloads](https://pepy.tech/badge/imagesc/month)](https://pepy.tech/project/imagesc/month)
 [![Downloads](https://pepy.tech/badge/imagesc)](https://pepy.tech/project/imagesc)
 
+.. image:: https://img.shields.io/pypi/pyversions/imagesc
+   :target: https://img.shields.io/pypi/pyversions/imagesc
+   :alt: PyPi package version
+
+.. image:: https://pepy.tech/badge/imagesc/month
+   :target: https://pepy.tech/project/imagesc/month
+   :alt: PyPi downloads
+
+.. image:: https://img.shields.io/github/forks/erdogant/imagesc.svg
+   :alt: GitHub Forks
+   :target: https://github.com/erdogant/imagesc/network
+
+.. image:: https://img.shields.io/github/issues/erdogant/imagesc.svg
+   :alt: GitHub Open Issues
+   :target: https://github.com/erdogant/imagesc/issues
+
+.. image:: https://secure.travis-ci.org/erdogant/imagesc.png?branch=master
+   :target: http://travis-ci.org/erdogant/imagesc
+   :alt: travis-ci for master branch
+
+.. image:: http://www.repostatus.org/badges/latest/active.svg
+   :alt: Project Status: Active - The project has reached a stable, usable state and is being actively developed.
+   :target: http://www.repostatus.org/#active
+   
+   
 * imagesc is an Python package to create heatmaps. Various methods to create a heatmap are implemented, each with specific properties that can help to easily create your heatmap. The **fast** and **clean** method is optimized for speed, the **cluster** method provides clustering, the **seaborn** method contains many configuration settings, and finally, the **plot** as good as possible the imagesc from matlab.
 
 ### Functions in imagesc
