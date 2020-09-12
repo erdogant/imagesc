@@ -64,6 +64,13 @@ paths = imagesc.d3(df, fontsize=10, title='Hooray!', description='python to d3 c
 [d3 imagesc example](https://erdogant.github.io/docs/imagesc/d3heatmap.html)
 
 <p align="center">
+  <a href="https://erdogant.github.io/docs/imagesc/d3heatmap.html">
+     <img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/d3_heatmap.png" />
+  </a>
+</p>
+
+
+<p align="center">
   <img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/d3_heatmap.png" />
 </p>
 
