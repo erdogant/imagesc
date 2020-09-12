@@ -4,7 +4,6 @@
 [![PyPI Version](https://img.shields.io/pypi/v/imagesc)](https://pypi.org/project/imagesc/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/erdogant/imagesc/blob/master/LICENSE)
 [![Coffee](https://img.shields.io/badge/coffee-black-grey.svg)](https://erdogant.github.io/donate/?currency=USD&amount=5)
-[![Forks]( https://img.shields.io/github/forks/erdogant/imagesc.svg)](https://github.com/erdogant/imagesc/network)
 [![Downloads](https://pepy.tech/badge/imagesc/month)](https://pepy.tech/project/imagesc/month)
 [![Downloads](https://pepy.tech/badge/imagesc)](https://pepy.tech/project/imagesc)
 [![Github Forks](https://img.shields.io/github/forks/erdogant/imagesc.svg)](https://github.com/erdogant/imagesc/network)
