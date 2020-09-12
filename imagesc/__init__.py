@@ -62,7 +62,6 @@ References
 * Colormap
     https://matplotlib.org/examples/color/colormaps_reference.html
 * d3
-    d3-graph-gallery.com
-
+    https://d3-graph-gallery.com
 
 """

@@ -132,40 +132,6 @@ import tempfile
 curpath = os.path.dirname(os.path.abspath(__file__))
 
 
-# %% Scaling
-def _scale(X, verbose=3):
-    """Scale data.
-
-    Description
-    -----------
-    Scaling in range by X*(100/max(X))
-
-    Parameters
-    ----------
-    X : array-like
-        Input image data.
-    verbose : int (default : 3)
-        Print to screen. 0: None, 1: Error, 2: Warning, 3: Info, 4: Debug, 5: Trace.
-
-    Returns
-    -------
-    df : array-like
-        Scaled image.
-
-    """
-    if verbose>=3: print('[imagesc] >Scaling image between [min-100]')
-    try:
-        # Normalizing between 0-100
-        # X = X - X.min()
-        X = X / X.max().max()
-        X = X * 100
-        X = np.round(X)
-    except:
-        if verbose>=2: print('[imagesc] >Warning: Scaling not possible.')
-
-    return X
-
-
 # %%
 def d3(df, path=None, title='d3 Heatmap!', description='Heatmap description', width=500, height=500, fontsize=10, cmap='interpolateInferno', scale=False, vmin=None, vmax=None, showfig=True, stroke='red', verbose=3):
     """Heatmap in d3 javascript.
@@ -200,6 +166,8 @@ def d3(df, path=None, title='d3 Heatmap!', description='Heatmap description', wi
         Color of the recangle when hovering over a cell.
             * 'red'
             * 'black'
+    showfig : Bool, (default: True)
+        Open browser with heatmap.
     cmap : String, (default: 'interpolateInferno').
         The colormap scheme. This can be found at: https://github.com/d3/d3-scale-chromatic.
         Categorical:
@@ -255,8 +223,6 @@ def d3(df, path=None, title='d3 Heatmap!', description='Heatmap description', wi
         Cyclic:
             * 'interpolateRainbow'
             * 'interpolateSinebow'
-    showfig : Bool, (default: True)
-        Open browser with heatmap.
     verbose : int [0-5], (default: 3)
         Verbosity to print the working-status. The higher the number, the more information.
             * 0: None
@@ -886,7 +852,7 @@ def _path_check(path, verbose):
         path = os.path.join(tempfile.gettempdir(), filename)
         dirpath, filename = os.path.split(path)
     # Check before proceeding
-    if not '.html' in filename:
+    if (not '.html' in filename):
         raise ValueError('[imagesc] >path should contain the file extension: ".html" ')
     # Create dir
     if not os.path.isdir(dirpath):
@@ -897,7 +863,40 @@ def _path_check(path, verbose):
     dirpath, filename = os.path.split(path)
     return filename, dirpath, path
 
-    
+
+# %% Scaling
+def _scale(X, verbose=3):
+    """Scale data.
+
+    Description
+    -----------
+    Scaling in range by X*(100/max(X))
+
+    Parameters
+    ----------
+    X : array-like
+        Input image data.
+    verbose : int (default : 3)
+        Print to screen. 0: None, 1: Error, 2: Warning, 3: Info, 4: Debug, 5: Trace.
+
+    Returns
+    -------
+    df : array-like
+        Scaled image.
+
+    """
+    if verbose>=3: print('[imagesc] >Scaling image between [min-100]')
+    try:
+        # Normalizing between 0-100
+        # X = X - X.min()
+        X = X / X.max().max()
+        X = X * 100
+        X = np.round(X)
+    except:
+        if verbose>=2: print('[imagesc] >Warning: Scaling not possible.')
+
+    return X
+
 
 # %%
 def _annotate_heatmap(im, data=None, valfmt="{x:.2f}", textcolors=["black", "white"], threshold=None, **textkw):
