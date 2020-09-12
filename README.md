@@ -72,14 +72,10 @@ paths = imagesc.d3(df, fontsize=10, title='Hooray!', description='python to d3 c
 ```
 https://erdogant.github.io/docs/d3graph/titanic_example/index.html
 
-* <a href="https://erdogant.github.io/docs/imagesc/d3heatmap.html">imagesc d3 example</a>
-<link rel="import" href="https://erdogant.github.io/docs/imagesc/d3heatmap.html">
-
 [d3 imagesc example](https://erdogant.github.io/docs/imagesc/d3heatmap.html)
 
-
 <p align="center">
-  <img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/d3_heatmap.png" width="300" />
+  <img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/d3_heatmap.png" />
 </p>
 
 ### seaborn
