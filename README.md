@@ -4,26 +4,12 @@
 [![PyPI Version](https://img.shields.io/pypi/v/imagesc)](https://pypi.org/project/imagesc/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/erdogant/imagesc/blob/master/LICENSE)
 [![Coffee](https://img.shields.io/badge/coffee-black-grey.svg)](https://erdogant.github.io/donate/?currency=USD&amount=5)
+[![Forks]( https://img.shields.io/github/forks/erdogant/imagesc.svg)](https://github.com/erdogant/imagesc/network)
 [![Downloads](https://pepy.tech/badge/imagesc/month)](https://pepy.tech/project/imagesc/month)
 [![Downloads](https://pepy.tech/badge/imagesc)](https://pepy.tech/project/imagesc)
-
-[![Python]( https://img.shields.io/github/forks/erdogant/imagesc.svg)](https://github.com/erdogant/imagesc/network)
-
-.. image:: https://img.shields.io/github/forks/erdogant/imagesc.svg
-   :alt: GitHub Forks
-   :target: https://github.com/erdogant/imagesc/network
-
-.. image:: https://img.shields.io/github/issues/erdogant/imagesc.svg
-   :alt: GitHub Open Issues
-   :target: https://github.com/erdogant/imagesc/issues
-
-.. image:: https://secure.travis-ci.org/erdogant/imagesc.png?branch=master
-   :target: http://travis-ci.org/erdogant/imagesc
-   :alt: travis-ci for master branch
-
-.. image:: http://www.repostatus.org/badges/latest/active.svg
-   :alt: Project Status: Active - The project has reached a stable, usable state and is being actively developed.
-   :target: http://www.repostatus.org/#active
+[![Github Forks](https://img.shields.io/github/forks/erdogant/imagesc.svg)](https://github.com/erdogant/imagesc/network)
+[![GitHub Open Issues](https://img.shields.io/github/issues/erdogant/imagesc.svg)](https://github.com/erdogant/imagesc/issues)
+[![Project Status](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
    
    
 * imagesc is an Python package to create heatmaps. Various methods to create a heatmap are implemented, each with specific properties that can help to easily create your heatmap. The **fast** and **clean** method is optimized for speed, the **cluster** method provides clustering, the **seaborn** method contains many configuration settings, and finally, the **plot** as good as possible the imagesc from matlab.
