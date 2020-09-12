@@ -126,10 +126,10 @@ import numpy as np
 from packaging import version
 import os
 from imagesc.utils.adjmat_vec import adjmat2vec
-curpath = os.path.dirname(os.path.abspath(__file__))
 from shutil import copyfile
 import webbrowser
 import tempfile
+curpath = os.path.dirname(os.path.abspath(__file__))
 
 
 # %% Scaling
@@ -138,7 +138,7 @@ def _scale(X, verbose=3):
 
     Description
     -----------
-    Scaling in range [0-100] by X*(100/max(X))
+    Scaling in range by X*(100/max(X))
 
     Parameters
     ----------
@@ -153,7 +153,7 @@ def _scale(X, verbose=3):
         Scaled image.
 
     """
-    if verbose>=3: print('[imagesc] >Scaling image between [0-100]')
+    if verbose>=3: print('[imagesc] >Scaling image between [min-100]')
     try:
         # Normalizing between 0-100
         # X = X - X.min()
