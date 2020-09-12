@@ -46,7 +46,7 @@ Examples
 >>> status = imagesc.savefig(fig)
 >>>
 >>> # d3 example
->>> out = imagesc.d3(df, cmap='interpolateGreens', fontsize=15)
+>>> out = imagesc.d3(df, cmap='interpolateGreens', fontsize=12)
 >>>
 
 References

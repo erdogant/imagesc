@@ -235,8 +235,8 @@ def d3(df, path=None, title='d3 Heatmap!', description='Heatmap description', wi
     Example
     -------
     >>> import imagesc
-    >>> df = pd.DataFrame(np.random.randint(0, 10, size=(52, 7)))
-    >>> paths = imagesc.d3(df, fontsize=10, title='Python to d3 conversion!', description='Click here for the interactive website!', path='d3heatmap.html', width=750, height=200, cmap='interpolateGreens')
+    >>> df = pd.DataFrame(np.random.randint(0, 10, size=(7, 52)))
+    >>> paths = imagesc.d3(df, fontsize=10, title='Python to d3 conversion!', description='Click here for the interactive website!', path='d3heatmap.html', height=200, width=750, cmap='interpolateGreens')
 
     Returns
     -------
@@ -281,7 +281,7 @@ def d3(df, path=None, title='d3 Heatmap!', description='Heatmap description', wi
 
     # Convert into adj into vector
     dfvec = adjmat2vec(df)
-    dfvec = dfvec.rename(columns={'source': 'group', 'target': 'variable', 'weight': 'value'})
+    dfvec = dfvec.rename(columns={'source': 'variable', 'target': 'group', 'weight': 'value'})
 
     # Write to disk (file is not used)
     basename, ext = os.path.splitext(filename)

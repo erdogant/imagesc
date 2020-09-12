@@ -20,19 +20,19 @@ df.iloc[4,4]=44
 df.iloc[3,4]=34
 df.iloc[4,9]=39
 df.iloc[0,9]=90
-imagesc.d3(df, fontsize=10, title='Hooray!', description='python to d3 conversion!', path='d3heatmap.html', width=750, height=200, cmap='interpolateGreens', vmin=1)
+imagesc.d3(df, fontsize=10, title='Hooray!', description='python to d3 conversion!', path='d3heatmap.html', width=600, height=300, cmap='interpolateGreens', vmin=1)
 
 # %%
-df = pd.DataFrame(np.random.randint(0, 10, size=(52, 7)))
-imagesc.d3(df, fontsize=10, title='Hooray!', description='python to d3 conversion!', path='d3heatmap.html', width=750, height=200, cmap='interpolateGreens')
-imagesc.d3(df, fontsize=10, title='Hooray!', description='python to d3 conversion!', path='d3heatmap.html', width=750, height=200, cmap='interpolateGreens', vmin=8, vmax=10)
-imagesc.d3(df, fontsize=10, title='Hooray!', description='python to d3 conversion!', path='d3heatmap.html', width=750, height=200, cmap='interpolateGreens', scale=True, vmin=80, vmax=100)
+df = pd.DataFrame(np.random.randint(0, 10, size=(7, 52)))
+imagesc.d3(df, fontsize=10, title='Hooray!', description='python to d3 conversion!', path='d3heatmap.html', height=200, width=750, cmap='interpolateGreens')
+imagesc.d3(df, fontsize=10, title='Hooray!', description='python to d3 conversion!', path='d3heatmap.html', height=200, width=750, cmap='interpolateGreens', vmin=8, vmax=10)
+imagesc.d3(df, fontsize=10, title='Hooray!', description='python to d3 conversion!', path='d3heatmap.html', height=200, width=750, cmap='interpolateGreens', scale=True, vmin=80, vmax=100)
 
-imagesc.d3(df, fontsize=10, title='Hooray!', description='python to d3 conversion!', path='d3heatmap.html', width=750, height=200, cmap='interpolateGreens', scale=True)
+imagesc.d3(df, fontsize=10, title='Hooray!', description='python to d3 conversion!', path='d3heatmap.html', height=200, width=750, cmap='interpolateGreens', scale=True)
 
-imagesc.d3(df, fontsize=10, title='Hooray!', description='python to d3 conversion!', path='d3heatmap.html', width=750, height=200, cmap='interpolateGreens', scale=False, vmin=None, vmax=None)
-imagesc.d3(df, fontsize=10, title='Hooray!', description='python to d3 conversion!', path='d3heatmap.html', width=750, height=200, cmap='interpolateGreens', scale=False, stroke='black')
-imagesc.d3(df, fontsize=10, title='Hooray!', description='python to d3 conversion!', path='d3heatmap.html', width=750, height=200, cmap='interpolateGreens', scale=False, stroke='red', vmin=None, vmax=None)
+imagesc.d3(df, fontsize=10, title='Hooray!', description='python to d3 conversion!', path='d3heatmap.html', height=200, width=750, cmap='interpolateGreens', scale=False, vmin=None, vmax=None)
+imagesc.d3(df, fontsize=10, title='Hooray!', description='python to d3 conversion!', path='d3heatmap.html', height=200, width=750, cmap='interpolateGreens', scale=False, stroke='black')
+imagesc.d3(df, fontsize=10, title='Hooray!', description='python to d3 conversion!', path='d3heatmap.html', height=200, width=750, cmap='interpolateGreens', scale=False, stroke='red', vmin=None, vmax=None)
 
 # %%
 # df = pd.DataFrame(np.random.rand(10,15))
