@@ -38,29 +38,20 @@ out = imagesc.d3(X)
 ## Requirements
 ```python
 # Note that: seaborn is only required when using **seaborn** or **cluster** functions.
-pip install numpy pandas matplotlib seaborn
-# or
 pip install -r requirements.txt
 ```
 
-## Quick Start
+## Installation from Pypi
 ```
 pip install imagesc
 ```
-
-* Alternatively, install imagesc from the GitHub source:
-```bash
-git clone https://github.com/erdogant/imagesc.git
-cd imagesc
-python setup.py install
-```  
 
 ## Import imagesc package
 ```python
 import imagesc as imagesc
 ```
 
-### d3
+### d3 example
 * Implemention is based on **d3**
 * Interactive
 * https://d3-graph-gallery.com
@@ -70,12 +61,10 @@ import imagesc
 df = pd.DataFrame(np.random.randint(0, 10, size=(52, 7)))
 paths = imagesc.d3(df, fontsize=10, title='Hooray!', description='python to d3 conversion using imagesc!', path='d3heatmap.html', width=750, height=200, cmap='interpolateGreens')
 ```
-https://erdogant.github.io/docs/d3graph/titanic_example/index.html
-
 [d3 imagesc example](https://erdogant.github.io/docs/imagesc/d3heatmap.html)
 
 <p align="center">
-  <img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/d3_heatmap.png" />
+  [<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/d3_heatmap.png"/>](https://erdogant.github.io/docs/imagesc/d3heatmap.html)
 </p>
 
 ### seaborn
