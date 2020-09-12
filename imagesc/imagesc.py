@@ -364,7 +364,7 @@ def plot(data, row_labels=None, col_labels=None, **args):
 
 
     """
-    assert not isinstance(data, pd.DataFrame), print('[IMAGESC] data input must be numpy array')
+    assert not isinstance(data, pd.DataFrame), print('[imagesc] >data input must be numpy array')
     # Set defaults
     args, args_im = _defaults(args)
     # Set figsize based on data shape
@@ -412,11 +412,11 @@ def seaborn(data, row_labels=None, col_labels=None, **args):
 
 
     """
-    assert not isinstance(data, pd.DataFrame), print('[IMAGESC] data input must be numpy array')
+    assert not isinstance(data, pd.DataFrame), print('[imagesc] >data input must be numpy array')
     try:
         import seaborn as sns
     except:
-        print('[IMAGESC] Error: seaborn is missing! Try to: pip install seaborn')
+        print('[imagesc] >Error: seaborn is missing! Try to: pip install seaborn')
 
     # Set defaults
     args, args_im = _defaults(args)
@@ -494,11 +494,11 @@ def cluster(data, row_labels=None, col_labels=None, **args):
 
 
     """
-    assert not isinstance(data, pd.DataFrame), print('[IMAGESC] data input must be numpy array')
+    assert not isinstance(data, pd.DataFrame), print('[imagesc] >data input must be numpy array')
     try:
         import seaborn as sns
     except:
-        print('[IMAGESC] Error: seaborn is missing! Try to: pip install seaborn')
+        print('[imagesc] >Error: seaborn is missing! Try to: pip install seaborn')
 
     # Set defaults
     args, args_im = _defaults(args)
@@ -557,7 +557,7 @@ def clean(data, row_labels=None, col_labels=None, **args):
 
 
     """
-    assert not isinstance(data, pd.DataFrame), print('[IMAGESC] data input must be numpy array')
+    assert not isinstance(data, pd.DataFrame), print('[imagesc] >data input must be numpy array')
     # Set defaults
     args, args_im = _defaults(args)
     # Linewidth if required
@@ -612,7 +612,7 @@ def fast(data, row_labels=None, col_labels=None, **args):
 
 
     """
-    assert not isinstance(data, pd.DataFrame), print('[IMAGESC] data input must be numpy array')
+    assert not isinstance(data, pd.DataFrame), print('[imagesc] >data input must be numpy array')
     # Set defaults
     args, args_im = _defaults(args)
     # Linewidth if required
@@ -782,7 +782,7 @@ def _heatmap(data, row_labels, col_labels, args_im, **args):
 def _defaults(args):
     # Version check
     if not version.parse(matplotlib.__version__) > version.parse("3.1.1"):
-        print('[IMAGESC] Warning: Matplotlib version is advised to be to be > v3.1.1. Otherwise heatmaps can have cut-off tops and bottoms.\nTry to: pip install -U matplotlib')
+        print('[imagesc] >Warning: Matplotlib version is advised to be to be > v3.1.1. Otherwise heatmaps can have cut-off tops and bottoms.\nTry to: pip install -U matplotlib')
 
     # Extract the below for internal stuff
     getdefaults={'xlabel':None,'ylabel':None,'title':None,'axis':True,'grid':True,'normalize':False,'label_orientation':'below','verbose':3,'xtickRot':90,'ytickRot':0,'dpi':100,'figsize':(15,5)}
@@ -814,7 +814,7 @@ def _check_input(data, linewidth, args_im):
     if linewidth<0: linewidth=0
     # Check cols and rows with linewidth
     if ((data.shape[0]>100) or (data.shape[1]>100)) and (linewidth>0):
-        if args_im['verbose']>=2: print('[IMAGESC] WARNING: Plot will be poorly visible if [linewidth>0] with rows/columns>100. Set linewidth=0 to adjust. [auto-adjusting...]' )
+        if args_im['verbose']>=2: print('[imagesc] >WARNING: Plot will be poorly visible if [linewidth>0] with rows/columns>100. Set linewidth=0 to adjust. [auto-adjusting...]' )
         linewidth=0
     
     return(linewidth)
@@ -822,7 +822,7 @@ def _check_input(data, linewidth, args_im):
 # %% Check input
 def _normalize(data, args_im):
     if args_im['normalize']:
-        if args_im['verbose'] >=3: print('[IMAGESC] Normalzing data..')
+        if args_im['verbose'] >=3: print('[imagesc] >Normalzing data..')
         data = (data - data.mean()) / (data.max() - data.min())
     return(data)
 
