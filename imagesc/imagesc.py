@@ -375,6 +375,7 @@ def plot(data, row_labels=None, col_labels=None, **args):
     data = _normalize(data, args_im)
     # Make plot
     fig, ax = plt.subplots(figsize=args_im['figsize'])
+    # Make the heatmap
     _ = _heatmap(data, row_labels, col_labels, args_im, **args)
     # Add text into the cells
     # _  = _annotate_heatmap(im, valfmt="{x:.1f} t")
@@ -727,7 +728,7 @@ def _heatmap(data, row_labels, col_labels, args_im, **args):
 
     if not ax:
         ax = plt.gca()
-        
+
     # Plot the heatmap
     im = ax.imshow(data, **args)
 
@@ -740,10 +741,10 @@ def _heatmap(data, row_labels, col_labels, args_im, **args):
         from mpl_toolkits.axes_grid1 import make_axes_locatable
         divider = make_axes_locatable(ax)
         cax = divider.append_axes("right", size="5%", pad=0.05)
-        plt.colorbar(im, cax=cax)
+        cbar = plt.colorbar(im, cax=cax)
 
     # We want to show all ticks...
-    if not col_labels is None:
+    if col_labels is not None:
         ax.set_xticks(np.arange(data.shape[1]))
         ax.set_xticklabels(col_labels)
         # Let the horizontal axes labeling appear on top.
@@ -755,7 +756,7 @@ def _heatmap(data, row_labels, col_labels, args_im, **args):
         # plt.setp(ax.get_xticklabels(), rotation=args_im['xtickRot'], ha="right", rotation_mode="anchor")
         ax.set_xticklabels(col_labels, rotation=args_im['xtickRot'], ha='center', minor=False)
 
-    if not row_labels is None:
+    if row_labels is not None:
         ax.set_yticks(np.arange(data.shape[0]))
         ax.set_yticklabels(row_labels)
         ax.set_yticklabels(row_labels, rotation=args_im['ytickRot'], ha='right', minor=False)
@@ -766,19 +767,20 @@ def _heatmap(data, row_labels, col_labels, args_im, **args):
 
     if args_im['grid']:
         # if not col_labels is None:
-        ax.set_xticks(np.arange(data.shape[1]+1)-.5, minor=True)
+        ax.set_xticks(np.arange(data.shape[1] + 1) - .5, minor=True)
         # if not row_labels is None:
-        ax.set_yticks(np.arange(data.shape[0]+1)-.5, minor=True)
+        ax.set_yticks(np.arange(data.shape[0] + 1) - .5, minor=True)
     if args_im['linewidth']>0 and args_im['grid']:
         ax.grid(which="minor", color=args_im['linecolor'], linestyle='-', linewidth=args_im['linewidth'])
-    if args_im['axis']==False:
+    if args_im['axis'] is False:
         plt.axis('off')
+    # Grid
     ax.grid(False)
 
     return(im)
 
 
-#%% Set defaults
+# %% Set defaults
 def _defaults(args):
     # Version check
     if not version.parse(matplotlib.__version__) > version.parse("3.1.1"):
