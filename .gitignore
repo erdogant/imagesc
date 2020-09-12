@@ -3,10 +3,17 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# imagesc ignores
+*.js
+*.html
+
 # C extensions
 *.so
 
 # Distribution / packaging
+.Python
+examples/tmp/
+tmp/
 .pylint.*
 .Python
 build/
