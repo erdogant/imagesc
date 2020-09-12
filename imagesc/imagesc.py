@@ -124,12 +124,133 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 from packaging import version
+import os
+from imagesc.utils.adjmat_vec import adjmat2vec
+curpath = os.path.dirname(os.path.abspath(__file__))
+from shutil import copyfile
+import webbrowser
 
 # %% Adjust figure size based on input
 def _set_figsize(data_shape, figsize):
     data_ratio = np.minimum(5/(data_shape[0]/data_shape[1]), 50)
     out = tuple(np.ceil(np.interp(data_shape-np.min(data_shape), [np.min(figsize), data_ratio], [np.max(figsize), data_ratio])))
     return(out[0], out[1])
+
+# %%
+def _path_check(path, verbose):
+    # Check wether path
+    if path is None:
+        path = os.path.join(curpath, 'index.html')
+    # Check wether dir + path
+    dirpath, filename = os.path.split(path)
+    # if input is single file, attach the absolute path.
+    if dirpath=='':
+        path = os.path.join(curpath, filename)
+        dirpath, filename = os.path.split(path)
+    # Check before proceeding
+    if not '.html' in filename:
+        raise ValueError('[imagesc] >path should contain the file extension: ".html" ')
+    # Create dir
+    if not os.path.isdir(dirpath):
+        if verbose>=2: print('[imagesc] >Warning: Creating directory [%s]' %(dirpath))
+        os.makedirs(dirpath, exist_ok=True)
+    # Final
+    path = os.path.abspath(path)
+    dirpath, filename = os.path.split(path)
+    return filename, dirpath, path
+
+# %%
+def d3(df, path=None, title='d3 Heatmap!', description='Heatmap description', width=500, height=500, fontsize=10, cmap='interpolateInferno', showfig=True, verbose=3):
+    # https://github.com/d3/d3-scale-chromatic
+    # scaleOrdinal
+    # scaleSequential
+    # interpolateSinebow
+    # interpolateGreens
+    # schemePastel1
+    # schemeSet1
+    # schemeTableau10
+
+    if cmap in ['schemeCategory10', 'schemeAccent', 'schemeDark2', 'schemePaired', 'schemePastel2', 'schemePastel1', 'schemeSet1', 'schemeSet2', 'schemeSet3', 'schemeTableau10']:
+        cmap_type='scaleOrdinal'
+        if verbose>=3: print('[imagesc] >d3 cmap type is set to %s' %(cmap_type))
+    else:
+        cmap_type='scaleSequential'
+
+    # Get path to files
+    d3_library = os.path.abspath(os.path.join(curpath, 'd3js/d3.v4.js'))
+    d3_chromatic = os.path.abspath(os.path.join(curpath, 'd3js/d3.scale.chromatic.v1.min.js'))
+    d3_script = os.path.abspath(os.path.join(curpath, 'd3js/d3script.html'))
+
+    # Set fontsize for x-axis, y-axis
+    fontsize_x = fontsize
+    fontsize_y = fontsize
+
+    # Check path
+    filename, dirpath, path = _path_check(path, verbose)
+
+    # Copy files to destination directory
+    copyfile(d3_library, os.path.join(dirpath, os.path.basename(d3_library)))
+    copyfile(d3_chromatic, os.path.join(dirpath, os.path.basename(d3_chromatic)))
+    copyfile(d3_script, path)
+
+    # Convert into adj into vector
+    dfvec = adjmat2vec(df)
+    dfvec = dfvec.rename(columns={'source': 'group', 'target': 'variable', 'weight': 'value'})
+
+    # Write to disk (file is not used)
+    basename, ext = os.path.splitext(filename)
+    PATHNAME_TO_CSV = os.path.join(dirpath, basename + '.csv')
+    dfvec.to_csv(PATHNAME_TO_CSV, index=False)
+
+    # Embed the Data in the HTML. Note that the embedding is an important stap te prevent security issues by the browsers.
+    # Most (if not all) browser do not accept to read a file using d3.csv or so. It then requires security-by-passes, but thats not the way to go.
+    # An alternative is use local-host and CORS but then the approach is not user-friendly coz setting up this, is not so straightforward.
+    # It leaves us by embedding the data in the HTML. Thats what we are going to do here.
+    DATA_STR = ''
+    for i in range(0, dfvec.shape[0]):
+        newline = '{group : "' + str(dfvec['group'].iloc[i]) + '", variable : "' + str(dfvec['variable'].iloc[i]) + '", value : "' + str(dfvec['value'].iloc[i]) +'"},'
+        newline = newline + '\n'
+        DATA_STR = DATA_STR + newline
+
+    # Read the data
+    # var data = 
+    # 	[
+    # 		{"group":"A", "variable":"v1", "value":"3"},
+    # 		{"group":"A", "variable":"v2", "value":"5"},
+    # 		{"group":"B", "variable":"v1", "value":"10"},
+    # 		{"group":"B", "variable":"v2", "value":"10"}
+    # 	]
+
+    # Import in the file
+    with open(path, 'r') as file: d3graphscript = file.read()
+
+    # Read the d3 html with script file
+    d3graphscript = d3graphscript.replace('$DESCRIPTION$', str(description))
+    d3graphscript = d3graphscript.replace('$TITLE$', str(title))
+
+    d3graphscript = d3graphscript.replace('$WIDTH$', str(width))
+    d3graphscript = d3graphscript.replace('$HEIGHT$', str(height))
+
+    d3graphscript = d3graphscript.replace('$FONTSIZE_X$', str(fontsize_x))
+    d3graphscript = d3graphscript.replace('$FONTSIZE_Y$', str(fontsize_y))
+
+    d3graphscript = d3graphscript.replace('$CMAP$', str(cmap))
+    d3graphscript = d3graphscript.replace('$CMAP_TYPE$', str(cmap_type))
+
+    d3graphscript = d3graphscript.replace('$DATA_PATH$', filename)
+    d3graphscript = d3graphscript.replace('$DATA_COMES_HERE$', DATA_STR)
+
+    # Write to file
+    with open(path, 'w') as file: file.write(d3graphscript)
+    # Open browser with heatmap
+    if showfig: webbrowser.open(path, new=1)
+    # Return
+    out = {}
+    out['filename'] = filename
+    out['dirpath'] = dirpath
+    out['path'] = path
+    out['csv'] = PATHNAME_TO_CSV
+    return out
 
 # %%
 def plot(data, row_labels=None, col_labels=None, **args):

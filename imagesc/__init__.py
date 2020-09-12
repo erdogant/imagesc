@@ -1,11 +1,17 @@
 from imagesc.imagesc import (
+    d3,
     seaborn,
     cluster,
     fast,
     clean,
     plot)
 
-from imagesc.savefig import savefig
+from imagesc.utils.savefig import savefig
+
+from imagesc.utils.adjmat_vec import (
+    vec2adjmat,
+    adjmat2vec,
+    )
 
 __author__ = 'Erdogan Tasksen'
 __email__ = 'erdogant@gmail.com'

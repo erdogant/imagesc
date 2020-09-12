@@ -11,6 +11,10 @@ import numpy as np
 import imagesc as imagesc
 
 # %%
+df = pd.DataFrame(np.random.randint(0, 100, size=(52, 7)))
+imagesc.d3(df, fontsize=10, title='Hooray!', description='python to d3 conversion!', path='c://temp/new/d3heatmap.html', width=750, height=200, cmap='interpolateGreens')
+
+# %%
 # df = pd.DataFrame(np.random.rand(10,15))
 df = pd.DataFrame(np.random.randint(0,100,size=(6,20)))
 # df = pd.DataFrame(np.random.randint(0,100,size=(5,25)))
