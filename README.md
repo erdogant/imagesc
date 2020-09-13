@@ -9,8 +9,8 @@
 [![Project Status](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
 [![Downloads](https://pepy.tech/badge/imagesc/month)](https://pepy.tech/project/imagesc/month)
 [![Downloads](https://pepy.tech/badge/imagesc)](https://pepy.tech/project/imagesc)
-   
-   
+
+
 * imagesc is an Python package to create heatmaps. Various methods to create a heatmap are implemented, each with specific properties that can help to easily create your heatmap. The **fast** and **clean** method is optimized for speed, the **cluster** method provides clustering, the **seaborn** method contains many configuration settings, and finally, the **plot** as good as possible the imagesc from matlab.
 
 ### Functions in imagesc
