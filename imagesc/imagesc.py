@@ -250,6 +250,11 @@ def d3(df, path=None, title='d3 Heatmap!', description='Heatmap description', wi
     else:
         cmap_type='scaleSequential'
 
+    if len(df.columns.unique())!=len(df.columns):
+        if verbose>=2: print('[imagesc] >Warning: Input data should contain unique column names otherwise d3js randomly removes the non-unique ones.')
+    if len(df.index.unique())!=len(df.index):
+        if verbose>=2: print('[imagesc] >Warning: Input data should contain unique index names otherwise d3js randomly removes the non-unique ones.')
+
     # Rescale data between 0-100
     if scale:
         df = _scale(df, verbose=verbose)
