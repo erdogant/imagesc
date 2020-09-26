@@ -62,8 +62,8 @@ import imagesc as imagesc
 * https://d3-graph-gallery.com
 
 ```python
-df = pd.DataFrame(np.random.randint(0, 100, size=(20, 20)))
-imagesc.d3(df, path='c:/temp/example/d3_example.html', width=300, height=300, vmax=1)
+df = pd.DataFrame(np.random.randint(0, 100, size=(50, 50)))
+imagesc.d3(df, vmax=1)
 ```
 <p align="center">
   <img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/d3_heatmap_1.png" width="600" />
