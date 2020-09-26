@@ -181,8 +181,8 @@ def d3(df, clust=None, path=None, title='Co-occurrence heatmap', description=Non
     Example
     -------
     >>> import imagesc
-    >>> df = pd.DataFrame(np.random.randint(0,10,size=(20, 20)))
-    >>> paths = imagesc.d3heatmap(df, path='c:/temp/example/d3_example.html', width=600, height=600, vmax=1, scale=True)
+    >>> df = pd.DataFrame(np.random.randint(0, 100, size=(50, 50)))
+    >>> paths = imagesc.d3(df, vmax=1)
 
     Returns
     -------
