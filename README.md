@@ -55,6 +55,21 @@ pip install imagesc
 import imagesc as imagesc
 ```
 
+### d3
+* Implemention is based on **d3**
+* Interactive
+* Stand-alone
+* https://d3-graph-gallery.com
+
+```python
+df = pd.DataFrame(np.random.randint(0, 100, size=(20, 20)))
+imagesc.d3(df, path='c:/temp/example/d3_example.html', width=300, height=300, vmax=1)
+```
+<p align="center">
+  d3<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/d3_heatmap_1.png" width="300" />
+</p>
+
+
 ### seaborn
 * Underlying implemented is based on **seaborn**
 * Large number of configurations
@@ -206,21 +221,6 @@ fig = imagesc.plot(img, linewidth=0, cbar=False)
   <img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/time_in_secs.png" width="1000" />
 </p>
 
-
-
-### d3
-* Implemention is based on **d3**
-* Interactive
-* Stand-alone
-* https://d3-graph-gallery.com
-
-```python
-df = pd.DataFrame(np.random.randint(0, 100, size=(20, 20)))
-imagesc.d3(df, path='c:/temp/example/d3_example.html', width=300, height=300, vmax=1)
-```
-<p align="center">
-  d3<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/d3_heatmap_1.png.png" width="300" />
-</p>
 
 
 ### Citation
