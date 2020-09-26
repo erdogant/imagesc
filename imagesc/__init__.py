@@ -15,7 +15,7 @@ from imagesc.utils.adjmat_vec import (
 
 __author__ = 'Erdogan Tasksen'
 __email__ = 'erdogant@gmail.com'
-__version__ = '0.2.0'
+__version__ = '0.2.1'
 
 # module level doc-string
 __doc__ = """
@@ -45,8 +45,8 @@ Examples
 >>>
 >>> status = imagesc.savefig(fig)
 >>>
->>> # d3 example
->>> out = imagesc.d3(df, cmap='interpolateGreens', fontsize=12)
+>>> df = pd.DataFrame(np.random.randint(0, 100, size=(50, 50)))
+>>> imagesc.d3(df, vmax=1)
 >>>
 
 References
