@@ -66,7 +66,7 @@ df = pd.DataFrame(np.random.randint(0, 100, size=(20, 20)))
 imagesc.d3(df, path='c:/temp/example/d3_example.html', width=300, height=300, vmax=1)
 ```
 <p align="center">
-  d3<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/d3_heatmap_1.png" width="300" />
+  <img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/d3_heatmap_1.png" width="600" />
 </p>
 
 
