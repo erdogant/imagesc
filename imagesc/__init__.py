@@ -1,5 +1,4 @@
 from imagesc.imagesc import (
-    d3heatmap,
     d3,
     seaborn,
     cluster,

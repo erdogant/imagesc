@@ -14,7 +14,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-     install_requires=['matplotlib','numpy','pandas','ismember', 'packaging'],
+     install_requires=['matplotlib','numpy','pandas','ismember', 'packaging','ismember','d3heatmap'],
      python_requires='>=3',
      name='imagesc',
      version=new_version,
