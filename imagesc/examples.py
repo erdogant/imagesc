@@ -11,8 +11,8 @@ import numpy as np
 import imagesc
 
 # %%
-df = pd.DataFrame(np.random.randint(0, 100, size=(20, 20)))
-imagesc.d3(df, path='c:/temp/example/d3_example.html', width=300, height=300, vmax=1)
+df = pd.DataFrame(np.random.randint(0, 100, size=(50, 50)))
+imagesc.d3(df, vmax=1)
 
 # %%
 # df = pd.DataFrame(np.random.rand(10,15))
