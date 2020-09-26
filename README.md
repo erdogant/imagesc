@@ -16,13 +16,13 @@
 ### Functions in imagesc
 ```python
 # X is your numpy array
-fig = imagesc.seaborn(X)
-fig = imagesc.cluster(X)
-fig = imagesc.fast(X)
-fig = imagesc.clean(X)
-fig = imagesc.plot(X)
+fig  = imagesc.seaborn(X)
+fig  = imagesc.cluster(X)
+fig  = imagesc.fast(X)
+fig  = imagesc.clean(X)
+fig  = imagesc.plot(X)
 status = imagesc.savefig(fig)
-out = imagesc.d3(X)
+path = imagesc.d3(df)
 
 ```
 
@@ -54,23 +54,6 @@ pip install imagesc
 ```python
 import imagesc as imagesc
 ```
-
-### d3 example
-* Implemention is based on **d3**
-* Interactive
-* https://d3-graph-gallery.com
-
-```python
-import imagesc
-df = pd.DataFrame(np.random.randint(0, 10, size=(52, 7)))
-paths = imagesc.d3(df, fontsize=10, title='Hooray!', description='python to d3 conversion using imagesc!', path='d3heatmap.html', width=750, height=200, cmap='interpolateGreens')
-```
-
-<p align="center">
-  <a href="https://erdogant.github.io/docs/imagesc/d3heatmap.html">
-     <img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/d3_heatmap.png" />
-  </a>
-</p>
 
 ### seaborn
 * Underlying implemented is based on **seaborn**
@@ -223,6 +206,21 @@ fig = imagesc.plot(img, linewidth=0, cbar=False)
   <img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/time_in_secs.png" width="1000" />
 </p>
 
+
+
+### d3
+* Implemention is based on **d3**
+* Interactive
+* Stand-alone
+* https://d3-graph-gallery.com
+
+```python
+df = pd.DataFrame(np.random.randint(0, 100, size=(20, 20)))
+imagesc.d3(df, path='c:/temp/example/d3_example.html', width=300, height=300, vmax=1)
+```
+<p align="center">
+  d3<img src="https://github.com/erdogant/imagesc/blob/master/docs/figs/d3_heatmap_1.png.png" width="300" />
+</p>
 
 
 ### Citation
