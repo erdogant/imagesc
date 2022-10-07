@@ -122,7 +122,7 @@ def plot(data, row_labels=None, col_labels=None, **args):
     plt.show()
 
     # return
-    return(fig)
+    return fig, ax
 
 # %% Seaborn
 def seaborn(data, row_labels=None, col_labels=None, **args):
@@ -204,7 +204,7 @@ def seaborn(data, row_labels=None, col_labels=None, **args):
     plt.show()
     # Return
     fig = ax.get_figure()
-    return(fig)
+    return fig, ax
 
 # %% Cluster
 def cluster(data, row_labels=None, col_labels=None, **args):
@@ -267,7 +267,7 @@ def cluster(data, row_labels=None, col_labels=None, **args):
     # Plot
     plt.show()
     # Return
-    return(g.fig)
+    return g.fig
 
 # %% Clean
 def clean(data, row_labels=None, col_labels=None, **args):
@@ -322,7 +322,7 @@ def clean(data, row_labels=None, col_labels=None, **args):
     fig.tight_layout()
     plt.show()
     # Return
-    return(fig)
+    return fig, ax
 
 # %% Fast
 def fast(data, row_labels=None, col_labels=None, **args):
@@ -408,7 +408,7 @@ def fast(data, row_labels=None, col_labels=None, **args):
         ax.set_title(args_im['title'])
 
     # Return
-    return(fig)
+    return fig, ax
 
 # %%
 def _heatmap(data, row_labels, col_labels, args_im, **args):
