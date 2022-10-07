@@ -1,116 +1,4 @@
-""" imagesc is an Python package to create heatmaps in a easy way. Various different manners are implemented to create heatmaps.
-
-   import imagesc as imagesc
-
-   fig = imagesc.seaborn(data, <optional>)
-   fig = imagesc.cluster(data, <optional>)
-   fig = imagesc.fast(data, <optional>)
-   fig = imagesc.clean(data, <optional>)
-   fig = imagesc.plot(data, <optional>)
-   status = imagesc.savefig(fig)
-
-
- INPUT:
- ------
-
-   data:           Numpy array with rows and columns
-
-   row_labels:     A list or array of length N with the labels for the rows.
-
-   col_labels:     A list or array of length M with the labels for the columns.
-
-
-
- OPTIONAL
- --------
-
-   normalize:      Boolean [False,True]: Normalize data per row. x-x_mean  / max()-min()
-                   True: Yes
-                   False: No (default)
-
-   label_orientation: String: Plot labels above or below plot
-                   'above'
-                   'below' (default)
-
-   xtickRot:       Integer [0-360]:  Orientation of the labels
-                   90: (default)
-
-   ytickRot:       Integer [0-360]:  Orientation of the labels
-                   0: (default)
-
-   dpi:            Integer: Resolution of the figure
-                   100 (default)
-
-   xlabel:         String: The x-label
-                   None: (default)
-
-   ylabel:         String: The y-label
-                   None: (default)
-
-   title:          String: The title
-                   None: (default)
-
-   figsize:        tuple: (width, height)
-                   (10,10): (default)
-
-
- SPECIFIC ARGUMENTS
- ------------------
-
-   standard_scale: Boolean [False,True]
-                   True: Yes
-                   False: No (default)
-
-   annot:          Boolean [True,False]: Show per cell the value (does not work with clustering)
-                   True:
-                   False: (default)
-
-   grid:           Boolean [True,False]: Show grid
-                   True (Default)
-                   False
-
-   axis:           Boolean [True,False]: Show all axis in the plot
-                   True (Default)
-                   False
-
-   cbar:           Boolean [True,False]: Show the bar
-                   True (Default)
-                   False
-
-   linewidth:      Float:  Width of the line
-                   0.1: (default)
-                   0:   if no lines are desired such as in photos
-
-   linecolor:      String:  linecolor of the line in hex
-                   '#000000': (default)
-                   '#ffffff': (white)
-
-   vmin:           Float: [0-1] range of colors with minimum value
-                   None: (Do not use)
-
-   vmax:           Float: [0-1] range of colors with maximum value
-                   None: (Do not use)
-
-   distance:       String: Distance measure for cluster
-                   'euclidean' (default)
-
-   linkage:        String: Linkage type for cluster
-                   'ward' (default)
-
-   cmap:           String: Colormap
-                   'coolwarm'
-                   'bwr'        Blue-white-red (default)
-                   'RdBu'       Red-white-Blue
-                   'binary' or 'binary_r'
-                   'seismic'    Blue-white-red
-                   'rainbow'
-                   'Blues'      white-to-blue
-                   'Reds'
-                   'Pastel1'    Discrete colors
-                   'Paired'     Discrete colors
-                   'Set1'       Discrete colors
-
-"""
+""" imagesc is an Python package to create heatmaps in a easy way."""
 # --------------------------------------------------------------------------
 # Name        : imagesc.py
 # Author      : E.Taskesen
@@ -149,12 +37,6 @@ def d3(df, clust=None, path=None, title='Co-occurrence heatmap', description=Non
         Title text.
     description : String, (default: 'Heatmap description')
         Description text of the heatmap.
-    scale : Bool, (default: True).
-        Scale the values between [0-100].
-    vmin : Bool, (default: 0).
-        Range of colors starting with minimum value.
-            * 1 : cells with value <1 are coloured white.
-            * None : cells are colored based on the minimum value in the input data.
     vmax : Bool, (default: 100).
         Range of colors starting with maximum value.
             * 100 : cells above value >100 are capped.
@@ -190,7 +72,7 @@ def d3(df, clust=None, path=None, title='Co-occurrence heatmap', description=Non
         output path names.
 
     """
-    results = d3heatmap.heatmap(df, clust=clust, path=path, title=title, description=description, scale=scale, vmin=vmin, vmax=vmax, width=width, height=height, showfig=showfig, stroke=stroke, verbose=verbose)
+    results = d3heatmap.heatmap(df, clust=clust, path=path, title=title, description=description, vmax=vmax, width=width, height=height, showfig=showfig, stroke=stroke, verbose=verbose)
     # Return
     return results
 
