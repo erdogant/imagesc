@@ -15,7 +15,7 @@ from imagesc.utils.adjmat_vec import (
 
 __author__ = 'Erdogan Tasksen'
 __email__ = 'erdogant@gmail.com'
-__version__ = '0.2.1'
+__version__ = '0.3.0'
 
 # module level doc-string
 __doc__ = """
@@ -24,44 +24,34 @@ imagesc - imagesc is an Python package to create heatmaps in a easy way.
 
 Examples
 --------
->>>
+>>> # Import libraries
 >>> import pandas as pd
+>>> import imagesc as imagesc
+>>> # Create example dataset
 >>> df = pd.DataFrame(pd.np.random.rand(3,4), columns=['aap', 'boom', 'mies','banaan'] , index=['aap1', 'boom2', 'mies3'])
 >>>
->>> import imagesc as imagesc
+>>> # Example: Seaborn
+>>> fig, ax = imagesc.seaborn(df.values, df.index.values, df.columns.values)
 >>>
->>>
->>> # Seaborn example
->>> fig = imagesc.seaborn(df.values, df.index.values, df.columns.values)
->>>
->>> # Cluster example
+>>> # Example: Clustering
 >>> fig = imagesc.cluster(df.values, df.index.values, df.columns.values)
 >>>
->>> # Fast example
->>> fig = imagesc.fast(df.values, df.index.values, df.columns.values)
+>>> # Example: When speed matters
+>>> fig, ax = imagesc.fast(df.values, df.index.values, df.columns.values)
 >>>
 >>> # Plot example
->>> fig = imagesc.plot(df.values, df.index.values, df.columns.values)
+>>> fig, ax = imagesc.plot(df.values, df.index.values, df.columns.values)
 >>>
+>>> # Example: Save figure
 >>> status = imagesc.savefig(fig)
 >>>
+>>> Example: Heatmap in d3js
 >>> df = pd.DataFrame(np.random.randint(0, 100, size=(50, 50)))
 >>> imagesc.d3(df, vmax=1)
 >>>
 
 References
 ----------
-* seaborn
-    https://seaborn.pydata.org/generated/seaborn.heatmap.html
-* clustermap
-    https://seaborn.pydata.org/generated/seaborn.clustermap.html
-* fast and clean
-    https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.axes.Axes.pcolor.html
-* Other
-    https://matplotlib.org/3.1.1/gallery/images_contours_and_fields/image_annotated_heatmap.html
-* Colormap
-    https://matplotlib.org/examples/color/colormaps_reference.html
-* d3
-    https://d3-graph-gallery.com
-
+* d3blocks: d3blocks.github.io/d3blocks/
+* d3blocks (blog): https://towardsdatascience.com/creating-beautiful-stand-alone-interactive-d3-charts-with-python-804117cb95a7
 """

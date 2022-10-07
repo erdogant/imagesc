@@ -60,11 +60,17 @@ def d3(df, clust=None, path=None, title='Co-occurrence heatmap', description=Non
             * 4: Debug
             * 5: Trace
 
-    Example
-    -------
-    >>> import imagesc
+    Examples
+    --------
+    >>> # Import libraries
+    >>> import pandas as pd
+    >>> import imagesc as imagesc
+    >>> # Create example dataset
+    >>> df = pd.DataFrame(pd.np.random.rand(3,4), columns=['aap', 'boom', 'mies','banaan'] , index=['aap1', 'boom2', 'mies3'])
+    >>>
+    >>> Example: Heatmap in d3js
     >>> df = pd.DataFrame(np.random.randint(0, 100, size=(50, 50)))
-    >>> paths = imagesc.d3(df, vmax=1)
+    >>> imagesc.d3(df, vmax=1)
 
     Returns
     -------
@@ -91,6 +97,19 @@ def plot(data, row_labels=None, col_labels=None, **args):
         A list or array of length M with the labels for the columns.
     **args
         Various functionalities that can are directly used as input for seaborn.
+
+    Examples
+    --------
+    >>> # Import libraries
+    >>>
+    >>> import pandas as pd
+    >>> import imagesc as imagesc
+    >>>
+    >>> # Create Example dataset
+    >>> df = pd.DataFrame(pd.np.random.rand(3,4), columns=['aap', 'boom', 'mies','banaan'] , index=['aap1', 'boom2', 'mies3'])
+    >>>
+    >>> # Plot example
+    >>> fig, ax = imagesc.plot(df.values, df.index.values, df.columns.values)
 
     Returns
     -------
@@ -140,7 +159,19 @@ def seaborn(data, row_labels=None, col_labels=None, **args):
         Various functionalities that can are directly used as input for seaborn.
         https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.axes.Axes.pcolor.html
 
-
+    Examples
+    --------
+    >>> # Import libraries
+    >>> import pandas as pd
+    >>> import imagesc as imagesc
+    >>>
+    >>> # Create Example dataset
+    >>> df = pd.DataFrame(pd.np.random.rand(3,4), columns=['aap', 'boom', 'mies','banaan'] , index=['aap1', 'boom2', 'mies3'])
+    >>>
+    >>> # Example: Seaborn
+    >>> fig, ax = imagesc.seaborn(df.values, df.index.values, df.columns.values)
+    >>>
+    
     Returns
     -------
     fig.
@@ -223,6 +254,18 @@ def cluster(data, row_labels=None, col_labels=None, **args):
         Various functionalities that can are directly used as input for seaborn.
         https://seaborn.pydata.org/generated/seaborn.clustermap.html
 
+    Examples
+    --------
+    >>> # Import libraries
+    >>> import pandas as pd
+    >>> import imagesc as imagesc
+    >>>
+    >>> # Create Example dataset
+    >>> df = pd.DataFrame(pd.np.random.rand(3,4), columns=['aap', 'boom', 'mies','banaan'] , index=['aap1', 'boom2', 'mies3'])
+    >>>
+    >>> # Example: Clustering
+    >>> fig = imagesc.cluster(df.values, df.index.values, df.columns.values)
+
     Returns
     -------
     fig.
@@ -269,10 +312,10 @@ def cluster(data, row_labels=None, col_labels=None, **args):
     # Return
     return g.fig
 
+
 # %% Clean
 def clean(data, row_labels=None, col_labels=None, **args):
     """Clean heatmap figure.
-
 
     Parameters
     ----------
@@ -285,6 +328,17 @@ def clean(data, row_labels=None, col_labels=None, **args):
     **args : TYPE
         Various functionalities that can are directly used as input for seaborn.
         cmap, vmin, vmax, normalize
+
+    Examples
+    --------
+    >>> # Import libraries
+    >>> import pandas as pd
+    >>> import imagesc as imagesc
+    >>> # Create example dataset
+    >>> df = pd.DataFrame(pd.np.random.rand(3,4), columns=['aap', 'boom', 'mies','banaan'] , index=['aap1', 'boom2', 'mies3'])
+    >>>
+    >>> # Example: When no borders are grid is required.
+    >>> fig, ax = imagesc.clean(df.values, df.index.values, df.columns.values)
 
     Returns
     -------
@@ -340,6 +394,17 @@ def fast(data, row_labels=None, col_labels=None, **args):
         Various functionalities that can are directly used as input for seaborn.
         cmap, vmin, vmax, normalize
 
+    Examples
+    --------
+    >>> # Import libraries
+    >>> import pandas as pd
+    >>> import imagesc as imagesc
+    >>> # Create example dataset
+    >>> df = pd.DataFrame(pd.np.random.rand(3,4), columns=['aap', 'boom', 'mies','banaan'] , index=['aap1', 'boom2', 'mies3'])
+    >>>
+    >>> # Example: When speed matters
+    >>> fig, ax = imagesc.fast(df.values, df.index.values, df.columns.values)
+    >>>
 
     Returns
     -------
@@ -432,13 +497,12 @@ def _heatmap(data, row_labels, col_labels, args_im, **args):
         The label for the colorbar.  Optional.
     **args
         All other arguments are forwarded to `imshow`.
-        
 
     References
     ----------
     https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.axes.Axes.pcolor.html
     https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.axes.Axes.imshow.html
-    
+
     """
     # Cleaning args
     try:
